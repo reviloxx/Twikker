@@ -1,0 +1,40 @@
+﻿@model Twikker.Web.Models.IndexModel
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2 style="margin-bottom: 20px">Latest Posts</h2>
+@if (Context.Session.GetString("UserId") != null)
+{
+    <a asp-area="" asp-controller="Home" asp-action="AddPost">Add Post</a>
+}
+
+@if (Model.Posts.Any())
+{
+    @foreach (var item in Model.Posts)
+    {
+        <div class="row" style="margin-bottom: 50px">
+            <h4>@item.Creator - @item.CreationDate</h4>
+            <p>@item.Text</p>
+            @if (Context.Session.GetString("UserId") == item.CreatorId.ToString())
+            {
+                <button type="button" id=@item.TextId class="btn btn-danger deletePostButton" style="margin-bottom: 20px" >Delete</button>
+            }
+
+            @if (Context.Session.GetString("UserId") != null)
+            {
+                <div class="form-group">
+                    <input class="form-control" />
+                    <button type="submit" class="btn btn-default">Comment</button>
+                    <span class="text-danger"></span>
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <p>There are no posts to view.</p>
+}

@@ -19,9 +19,10 @@ export default class Navbar extends React.Component {
     render() {
         return (
             <ul className="nav navbar-nav" >
-                <li><a onClick={this.props.onHomeClick}>Home</a></li>
-                <li><a onClick={this.props.onLogoutClick}>Logout</a></li>
-                <li><a onClick={this.props.onLoginClick}> Login</a></li>
+                <a class="navbar-brand" href="#" onClick={this.props.onHomeClick}>Twikker</a>
+                <li><a href="#" onClick={this.props.onHomeClick}>Home</a></li>
+                <li><a href="#" onClick={this.props.onLogoutClick}>Logout</a></li>
+                <li><a href="#" onClick={this.props.onLoginClick}> Login</a></li>
             </ul>
             );
 

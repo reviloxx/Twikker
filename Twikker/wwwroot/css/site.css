@@ -1,4 +1,8 @@
-﻿.delete-button {
+﻿body {
+    background-color: #f0f5f5;
+}
+
+.delete-button {
     float: right;
     margin-right: 20px;
 }
@@ -6,6 +10,7 @@
 .body-content {
     margin-top: 75px;
     max-width: 800px;
+    
 }
 
 .login-form {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Twikker.Data;
 using Twikker.Data.Models;
+using Twikker.Web;
 using Twikker.Web.Models;
 
 namespace Twikker.Controllers
@@ -21,99 +22,59 @@ namespace Twikker.Controllers
             this.users = users;
             this.posts = posts;
         }
-
+        
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("getActiveUserId")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult GetActiveUserId()
+        {
+            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
+            return Json(loggedIn ? activeUserId : -1);
+        }
+
+
+        [Route("getPosts")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult GetPosts()
         {
             var posts = this.posts.GetAll();
 
             var postModel = posts
                 .Select(result => new PostModel
                 {
-                    CreationDate = result.CreationDate,
-                    Text = result.Content,
-                    Creator = this.users.GetById(result.UserId).NickName,       
-                    CreatorId = result.UserId,
-                    TextId = result.TextId
-                });
+                    CreationDate = result.CreationDate.ToString("dd.MM.yyyy, H:mm"),
+                    Content = result.Content,
+                    PostId = result.PostId,
+                    CreatorId = result.CreatorUserId,
+                    CreatorNickname = this.users.GetById(result.CreatorUserId).NickName
+                }).OrderByDescending(p => p.CreationDate);
+            
+            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
 
-            var model = new IndexModel() { Posts = postModel };
+            var model = new IndexModel()
+            {
+                Posts = postModel,
+                activeUserId = loggedIn ? activeUserId : -1
+            };
 
-            //var listingPosts = posts
-            //    .Select(result => new HomeModel
-            //    {
-            //         Posts = result
-            //    });
-
-            return View(model);
+            return Json(model);
         }
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Register(UserAccountModel user)
-        {
-            if (ModelState.IsValid)
-            {
-                this.users.Add(new Data.Models.User()
-                {
-                    DateOfBirth = user.DateOfBirth,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    NickName = user.NickName,
-                    Password = user.Password
-                });
-
-                ModelState.Clear();
-                ViewBag.Message = user.NickName + " is successfully registered!";
-            }
-
-            return View();
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Login(UserAccountModel user)
-        {
-            var account = this.users.GetByNickname(user.NickName);
-
-            if (account?.Password == user.Password)
-            {
-                HttpContext.Session.SetString("UserId", account.UserId.ToString());
-                HttpContext.Session.SetString("Nickname", account.NickName.ToString());
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ModelState.TryAddModelError("", "Nickname or password is wrong.");
-            }
-
-            return View();
-        }
-
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
-        }
+        }        
 
         public IActionResult AddPost()
         {
             return View();
         }
 
+        [Route("posts/add")]
         [HttpPost]
         public IActionResult AddPost(AddPostModel post)
         {
@@ -122,17 +83,28 @@ namespace Twikker.Controllers
             this.posts.Add(new Data.Models.Post()
             {
                 Content = post.Text,
-                UserId = userId,
-                CreationDate = DateTime.Now
+                Creator = this.users.GetById(userId),
+                CreationDate = DateTime.Now                
             });
 
-            return RedirectToAction("Index");
+            return Content("Success :");
         }
 
-        public IActionResult DeletePost(int id)
+        [Route("posts/delete")]
+        [HttpPost]
+        public IActionResult DeletePost(DeletePostModel model)
         {
-            this.posts.Remove(id);
-            return RedirectToAction("Index");
+            try
+            {
+                this.posts.Remove(model.PostId);
+            }
+            catch
+            {
+                return Json(new JSONResponse(false));
+            }
+            
+            return Json(new JSONResponse(true));
+            //return RedirectToAction("Index");
         }
     }
 }

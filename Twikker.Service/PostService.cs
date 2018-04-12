@@ -30,7 +30,7 @@ namespace Twikker.Service
         {
             return
                 this.context.Posts
-                .FirstOrDefault(p => p.TextId == postId);
+                .FirstOrDefault(p => p.PostId == postId);
         }
 
         public void Remove(int postId)

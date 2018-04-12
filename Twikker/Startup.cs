@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +23,9 @@ namespace Twikker.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -32,7 +34,10 @@ namespace Twikker.Web
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IReaction, ReactionService>();
             services.AddScoped<IUser, UserService>();
-            services.AddDbContext<TwikkerContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("TwikkerConnection")));
+            services.AddDbContext<TwikkerContext>(options =>
+                  options.UseSqlite(this.Configuration.GetConnectionString("TwikkerConnection")));
+
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

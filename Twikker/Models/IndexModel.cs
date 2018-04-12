@@ -9,17 +9,19 @@ namespace Twikker.Web.Models
     public class IndexModel
     {
         public IEnumerable<PostModel> Posts { get; set; }
+
+        public int activeUserId { get; set; }
     }
 
     public class PostModel
     {
-        public string Text { get; set; }
+        public string Content { get; set; }
 
-        public int TextId { get; set; }
+        public int PostId { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
 
-        public string Creator { get; set; }
+        public string CreatorNickname { get; set; }
 
         public int CreatorId { get; set; }
     }

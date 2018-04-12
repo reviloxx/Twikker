@@ -12,9 +12,10 @@ using Twikker.Data.Models;
 namespace Twikker.Data.Migrations
 {
     [DbContext(typeof(TwikkerContext))]
-    partial class TwikkerContextModelSnapshot : ModelSnapshot
+    [Migration("20180410143103_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -26,7 +26,7 @@ namespace Twikker.Service
         {
             return 
                 this.context.Posts
-                .FirstOrDefault(p => p.TextId == postId)
+                .FirstOrDefault(p => p.PostId == postId)
                 .Comments;
         }
 
@@ -34,7 +34,7 @@ namespace Twikker.Service
         {
             return
                 this.context.Comments
-                .FirstOrDefault(c => c.TextId == commentId);
+                .FirstOrDefault(c => c.CommentId == commentId);
         }
 
         public void Remove(int commentId)

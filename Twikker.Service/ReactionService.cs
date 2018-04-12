@@ -22,11 +22,19 @@ namespace Twikker.Service
             this.context.SaveChanges();
         }
 
-        public IEnumerable<Reaction> GetAll(int textId)
+        public IEnumerable<Reaction> GetAll(Post post, int postId)
         {
             return
-                this.context.Texts
-                .FirstOrDefault(txt => txt.TextId == textId)?
+                this.context.Posts
+                .FirstOrDefault(pos => pos.PostId == postId)?
+                .Reactions;
+        }
+
+        public IEnumerable<Reaction> GetAll(Comment comment, int commentId)
+        {
+            return
+                this.context.Comments
+                .FirstOrDefault(com => com.CommentId == commentId)?
                 .Reactions;
         }
 

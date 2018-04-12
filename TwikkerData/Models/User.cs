@@ -20,6 +20,12 @@ namespace Twikker.Data.Models
 
         public DateTime? DateOfBirth { get; set; }
 
+        public virtual IEnumerable<Post> Posts { get; set; }
+
+        public virtual IEnumerable<Comment> Comments { get; set; }
+
+        public virtual IEnumerable<Reaction> Reactions { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

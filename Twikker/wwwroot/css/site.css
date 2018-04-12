@@ -1,27 +1,43 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.delete-button {
+    float: right;
+    margin-right: 20px;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-top: 75px;
+    max-width: 800px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+.login-form {
+    max-width: 200px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+#navbar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
+.post {
+     border-style: groove;
+     margin-bottom: 20px;    
+     
+}
+
+.post-content {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.post-form {
+    margin-bottom: 40px;
+}
+
+.post-button {
+    /*float: right;
+    margin-right: 20px;*/
+}
+
+.form-control {
+    resize: none;
+}

@@ -8,21 +8,22 @@ export default class PostBox extends React.Component {
         this.state = {
             activeUserId: -1,
             data: {
-                posts: []
+                posts: [{ comments: [] }]
             }
         }
     }
 
     componentWillMount() {
         this.getPosts();
+        console.log(this.state);
     }
 
     getPosts() {
-        console.log("getPosts");
         var xhr = new XMLHttpRequest();
         xhr.open('get', this.props.url, true);
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
+            console.log("getPosts" + data);
             this.setState({ data: data });
         }.bind(this);
         xhr.send();
@@ -33,7 +34,7 @@ export default class PostBox extends React.Component {
             return (
                 <div className="post-box" >
                     <h1>Latest Posts</h1>
-                    <PostForm onAddedPost={() => this.getPosts()} />
+                    <PostForm onAddedPost={() => this.getPosts()} onChangedComment={() => this.getPosts()}/>
                     <PostList onDeletedPost={() => this.getPosts()} data={this.state.data} />                    
                 </div>
             );

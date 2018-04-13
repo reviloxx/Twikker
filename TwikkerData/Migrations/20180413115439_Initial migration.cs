@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Twikker.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,14 +34,14 @@ namespace Twikker.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Content = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    CreatorUserId = table.Column<int>(nullable: false)
+                    CreatorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_Users_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_Posts_Users_CreatorId",
+                        column: x => x.CreatorId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -55,15 +55,15 @@ namespace Twikker.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Content = table.Column<string>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    CreatorUserId = table.Column<int>(nullable: false),
+                    CreatorId = table.Column<int>(nullable: false),
                     PostId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Comments_Users_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_Comments_Users_CreatorId",
+                        column: x => x.CreatorId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -111,9 +111,9 @@ namespace Twikker.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_CreatorUserId",
+                name: "IX_Comments_CreatorId",
                 table: "Comments",
-                column: "CreatorUserId");
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
@@ -121,9 +121,9 @@ namespace Twikker.Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_CreatorUserId",
+                name: "IX_Posts_CreatorId",
                 table: "Posts",
-                column: "CreatorUserId");
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reactions_CommentId",

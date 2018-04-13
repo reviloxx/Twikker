@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom';
 import PostBox from './PostBox';
 import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 import Navbar from './Navbar';
 
 export default class Site extends React.Component {
@@ -11,9 +12,7 @@ export default class Site extends React.Component {
             activeUserId: -1
         }
         //var activeUserId = -1;
-    }
-
-    
+    }    
 
     componentWillMount() {
         this.getActiveUserId();        
@@ -40,9 +39,21 @@ export default class Site extends React.Component {
         this.renderHome();
     }
 
+    handleRegistration() {
+        this.getActiveUserId();
+        this.renderHome();
+    }
+
     renderLoginForm(e) {
         ReactDOM.render(
             <LoginForm onLoggedIn={() => this.handleLogin()}></LoginForm >,
+            document.getElementById('root')
+        );
+    }
+
+    renderRegistrationForm(e) {
+        ReactDOM.render(
+            <RegistrationForm onRegistered={() => this.handleRegistration()}></RegistrationForm >,
             document.getElementById('root')
         );
     }
@@ -74,6 +85,7 @@ export default class Site extends React.Component {
         ReactDOM.render(
             <Navbar activeUserId={this.activeUserId}
                 onHomeClick={() => this.renderHome()}
+                onRegisterClick={() => this.renderRegistrationForm()}
                 onLoginClick={() => this.renderLoginForm()}
                 onLogoutClick={() => this.handleLogout()}></Navbar>,
             document.getElementById('navbar')

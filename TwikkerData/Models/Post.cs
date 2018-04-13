@@ -10,7 +10,7 @@ namespace Twikker.Data.Models
         public int PostId { get; set; }
 
         [Required]
-        public int CreatorUserId { get; set; }
+        public int CreatorId { get; set; }
 
         [Required]
         public virtual User Creator { get; set; }

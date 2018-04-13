@@ -23,24 +23,23 @@ namespace Twikker.Web.Controllers
             return View();
         }
 
+        [Route("register")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
         public IActionResult Register(UserAccountModel user)
-        {
-            if (ModelState.IsValid)
+        {           
+            this.users.Add(new Data.Models.User()
             {
-                this.users.Add(new Data.Models.User()
-                {
-                    DateOfBirth = user.DateOfBirth,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    NickName = user.NickName,
-                    Password = user.Password
-                });
+                DateOfBirth = user.DateOfBirth,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NickName = user.NickName,
+                Password = user.Password
+            });
 
-                ModelState.Clear();
-                ViewBag.Message = user.NickName + " is successfully registered!";
-            }
+            ModelState.Clear();
+            ViewBag.Message = user.NickName + " is successfully registered!";            
 
             return View();
         }

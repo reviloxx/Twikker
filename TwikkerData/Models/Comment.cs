@@ -10,13 +10,16 @@ namespace Twikker.Data.Models
         public int CommentId { get; set; }
 
         [Required]
+        public int CreatorId { get; set; }
+
+        [Required]
         public virtual User Creator { get; set; }
 
         [Required]
-        public string Content { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [Required]
-        public DateTime CreationDate { get; set; }
+        public string Content { get; set; }        
 
         [Required]
         public virtual Post Post { get; set; }

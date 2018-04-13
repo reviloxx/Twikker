@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace Twikker.Web.Models
 {
-    public class AddPostModel
-    {        
+    public class AddCommentModel
+    {
         public string Content { get; set; }
+
+        public int PostId { get; set; }
     }
 }

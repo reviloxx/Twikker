@@ -16,11 +16,13 @@ namespace Twikker.Controllers
     {
         private IUser users;
         private IPost posts;
+        private IComment comments;
 
-        public HomeController(IUser users, IPost posts)
+        public HomeController(IUser users, IPost posts, IComment comments)
         {
             this.users = users;
             this.posts = posts;
+            this.comments = comments;
         }
         
         public IActionResult Index()
@@ -44,15 +46,24 @@ namespace Twikker.Controllers
             var posts = this.posts.GetAll();
 
             var postModel = posts
-                .Select(result => new PostModel
+                .Select(post => new PostModel
                 {
-                    CreationDate = result.CreationDate.ToString("dd.MM.yyyy, H:mm"),
-                    Content = result.Content,
-                    PostId = result.PostId,
-                    CreatorId = result.CreatorUserId,
-                    CreatorNickname = this.users.GetById(result.CreatorUserId).NickName
+                    PostId = post.PostId,
+                    CreatorId = post.CreatorId,
+                    CreatorNickname = this.users.GetById(post.CreatorId).NickName,
+                    CreationDate = post.CreationDate.ToString("dd.MM.yyyy, H:mm"),
+                    Content = post.Content,
+                    Comments = this.comments.GetAll(post.PostId)?
+                        .Select(comment => new CommentModel
+                        {
+                            CommentId = comment.CommentId,
+                            CreatorId = comment.CreatorId,
+                            CreatorNickname = this.users.GetById(comment.CreatorId).NickName,
+                            CreationDate = comment.CreationDate.ToString("dd.MM.yyyy, H:mm"),
+                            Content = comment.Content
+                        })
                 }).OrderByDescending(p => p.CreationDate);
-            
+
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
 
             var model = new IndexModel()
@@ -64,16 +75,6 @@ namespace Twikker.Controllers
             return Json(model);
         }
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }        
-
-        public IActionResult AddPost()
-        {
-            return View();
-        }
-
         [Route("posts/add")]
         [HttpPost]
         public IActionResult AddPost(AddPostModel post)
@@ -82,7 +83,7 @@ namespace Twikker.Controllers
 
             this.posts.Add(new Data.Models.Post()
             {
-                Content = post.Text,
+                Content = post.Content,
                 Creator = this.users.GetById(userId),
                 CreationDate = DateTime.Now                
             });
@@ -105,6 +106,24 @@ namespace Twikker.Controllers
             
             return Json(new JSONResponse(true));
             //return RedirectToAction("Index");
+        }
+
+        [Route("comments/add")]
+        [HttpPost]
+        public IActionResult AddComment(AddCommentModel comment)
+        {
+            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+
+            this.comments.Add(new Data.Models.Comment()
+            {
+                CreatorId = userId,
+                Content = comment.Content,
+                Post = this.posts.GetById(comment.PostId),
+                Creator = this.users.GetById(userId),
+                CreationDate = DateTime.Now
+            });
+
+            return Content("Success :");
         }
     }
 }

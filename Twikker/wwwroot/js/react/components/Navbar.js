@@ -21,8 +21,9 @@ export default class Navbar extends React.Component {
             <ul className="nav navbar-nav" >
                 <a class="navbar-brand" href="#" onClick={this.props.onHomeClick}>Twikker</a>
                 <li><a href="#" onClick={this.props.onHomeClick}>Home</a></li>
+                <li><a href="#" onClick={this.props.onRegisterClick}>Register</a></li>
                 <li><a href="#" onClick={this.props.onLogoutClick}>Logout</a></li>
-                <li><a href="#" onClick={this.props.onLoginClick}> Login</a></li>
+                <li><a href="#" onClick={this.props.onLoginClick}>Login</a></li>
             </ul>
             );
 

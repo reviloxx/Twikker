@@ -12,8 +12,8 @@ using Twikker.Data.Models;
 namespace Twikker.Data.Migrations
 {
     [DbContext(typeof(TwikkerContext))]
-    [Migration("20180410143103_Initial")]
-    partial class Initial
+    [Migration("20180413115439_Initial migration")]
+    partial class Initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,13 +31,13 @@ namespace Twikker.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<int>("CreatorUserId");
+                    b.Property<int>("CreatorId");
 
                     b.Property<int>("PostId");
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("PostId");
 
@@ -53,11 +53,11 @@ namespace Twikker.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<int>("CreatorUserId");
+                    b.Property<int>("CreatorId");
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Posts");
                 });
@@ -119,7 +119,7 @@ namespace Twikker.Data.Migrations
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Comments")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Twikker.Data.Models.Post", "Post")
@@ -132,7 +132,7 @@ namespace Twikker.Data.Migrations
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Posts")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -30,13 +30,13 @@ namespace Twikker.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<int>("CreatorUserId");
+                    b.Property<int>("CreatorId");
 
                     b.Property<int>("PostId");
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("PostId");
 
@@ -52,11 +52,11 @@ namespace Twikker.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<int>("CreatorUserId");
+                    b.Property<int>("CreatorId");
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Posts");
                 });
@@ -118,7 +118,7 @@ namespace Twikker.Data.Migrations
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Comments")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Twikker.Data.Models.Post", "Post")
@@ -131,7 +131,7 @@ namespace Twikker.Data.Migrations
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Posts")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

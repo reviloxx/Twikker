@@ -11,9 +11,6 @@ export default class CommentList extends React.Component {
     }
 
     render() {
-        console.log('Comments in CommentList: ' + this.props.comments);
-
-        return (<div />);
         var commentNodes = this.props.comments.map(function (comment) {
             return (
                 <Comment commentId={comment.postId}
@@ -23,7 +20,7 @@ export default class CommentList extends React.Component {
                     creationDate={comment.creationDate}
                     activeUserId={this.props.activeUserId}
                     key={comment.postId}>
-                    {post.content}
+                    {comment.content}
                 </Comment>
             );
         }.bind(this));

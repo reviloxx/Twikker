@@ -22,12 +22,13 @@ namespace Twikker.Service
             this.context.SaveChanges();
         }
 
-        public IEnumerable<Comment> GetAll(int postId)
+        public IEnumerable<Comment> GetByPostId(int postId)
         {
-            return 
-                this.context.Posts
-                .FirstOrDefault(p => p.PostId == postId)
-                .Comments;
+            var comments = this.context.Comments
+                .Where(p => p.PostId == postId);
+
+            return
+                comments;
         }
 
         public Comment GetById(int commentId)

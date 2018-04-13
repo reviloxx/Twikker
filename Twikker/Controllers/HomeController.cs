@@ -53,7 +53,7 @@ namespace Twikker.Controllers
                     CreatorNickname = this.users.GetById(post.CreatorId).NickName,
                     CreationDate = post.CreationDate.ToString("dd.MM.yyyy, H:mm"),
                     Content = post.Content,
-                    Comments = this.comments.GetAll(post.PostId)?
+                    Comments = this.comments.GetByPostId(post.PostId)?
                         .Select(comment => new CommentModel
                         {
                             CommentId = comment.CommentId,
@@ -63,6 +63,7 @@ namespace Twikker.Controllers
                             Content = comment.Content
                         })
                 }).OrderByDescending(p => p.CreationDate);
+            
 
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
 
@@ -119,6 +120,7 @@ namespace Twikker.Controllers
                 CreatorId = userId,
                 Content = comment.Content,
                 Post = this.posts.GetById(comment.PostId),
+                PostId = comment.PostId,
                 Creator = this.users.GetById(userId),
                 CreationDate = DateTime.Now
             });

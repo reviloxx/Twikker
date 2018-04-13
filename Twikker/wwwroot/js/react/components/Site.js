@@ -11,7 +11,6 @@ export default class Site extends React.Component {
         this.state = {
             activeUserId: -1
         }
-        //var activeUserId = -1;
     }    
 
     componentWillMount() {

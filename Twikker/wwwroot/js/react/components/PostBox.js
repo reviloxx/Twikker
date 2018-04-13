@@ -23,7 +23,7 @@ export default class PostBox extends React.Component {
         xhr.open('get', this.props.url, true);
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
-            console.log("getPosts" + data);
+            console.log(data);
             this.setState({ data: data });
         }.bind(this);
         xhr.send();

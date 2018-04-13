@@ -7,7 +7,7 @@ namespace Twikker.Data
 {
     public interface IComment
     {
-        IEnumerable<Comment> GetAll(int postId);       
+        IEnumerable<Comment> GetByPostId(int postId);       
 
         void Add(Comment newComment);
         Comment GetById(int commentId);

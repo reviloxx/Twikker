@@ -12,8 +12,8 @@ using Twikker.Data.Models;
 namespace Twikker.Data.Migrations
 {
     [DbContext(typeof(TwikkerContext))]
-    [Migration("20180413115439_Initial migration")]
-    partial class Initialmigration
+    [Migration("20180413163428_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Twikker.Data.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

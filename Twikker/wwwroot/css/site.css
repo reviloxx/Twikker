@@ -2,9 +2,6 @@
     background-color: #f7f7f7;    
 }
 
-.post-list {
-    background-color: white;
-}
 
 .delete-button {
     float: right;
@@ -27,11 +24,6 @@
 }
 
 .post {
-    /*border-style: groove;*/
-    /*background-color: #f7f7f7;*/
-}
-
-/*.post-content {
     margin-top: 10px;
     position: relative;
     height: 120px;
@@ -42,7 +34,8 @@
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 5px;
-}*/
+    background-color: white;
+}
 
 .post-form {
     margin-bottom: 40px;
@@ -66,7 +59,7 @@
     background-color: lightgray;
 }*/
 
-/*.comment {
+.comment {
     margin-top: 10px;
     margin-left: 40px;
     position: relative;
@@ -78,7 +71,8 @@
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 5px;
-}*/
+    background-color: white;
+}
 
 .comment-form {
     background-color: #f7f7f7;
@@ -91,7 +85,12 @@ h1 {
 
 .creator,
 .creation-date,
-.post-text {
+.post-text,
+.comment-text {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.comment-list {
+    background-color: #f7f7f7;
 }

@@ -14,7 +14,7 @@ export default class PostList extends React.Component {
         console.log('PostList ' + this.props.data.posts);
         var postNodes = this.props.data.posts.map(function (post) {
             return (
-                <div className="post">
+                <div className="post-list">
                     <Post postId={post.postId}
                         onDeletedPost={this.props.onDeletedPost}
                         creator={post.creatorNickname}
@@ -34,7 +34,7 @@ export default class PostList extends React.Component {
             );
         }.bind(this));
         return (
-            <div className="post-list">
+            <div>
                 {postNodes}
             </div>
         );

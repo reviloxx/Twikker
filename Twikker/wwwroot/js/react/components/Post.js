@@ -25,24 +25,20 @@ export default class Post extends React.Component {
     render() {
         if (this.props.activeUserId == this.props.creatorId) {
             return (
-                <div className="post">
-                    <div className="post-content">
+                    <div>
                         <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
                         <h2 className="creator">{this.props.creator}</h2>                        
                         <h4 className="creation-date">{this.props.creationDate}</h4>
                         <h4 className="post-text">{this.props.children}</h4>  
                     </div>
-                </div>
             );
         } else {
             return (
-                <div className="post">
-                    <div className="post-content">
+                    <div>
                         <h2 className="creator">{this.props.creator}</h2>
                         <h4 className="creation-date">{this.props.creationDate}</h4>
                         <h4 className="post-text">{this.props.children}</h4>
                     </div>
-                </div>
             );
         }        
     }

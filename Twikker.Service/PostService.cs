@@ -36,6 +36,8 @@ namespace Twikker.Service
         public void Remove(int postId)
         {
             this.context.Remove(this.GetById(postId));
+            this.context.RemoveRange(this.context.Comments
+                .Where(p => p.PostId == postId));            
             this.context.SaveChanges();
         }
     }

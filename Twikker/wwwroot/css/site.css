@@ -1,10 +1,13 @@
 ﻿body {
-    background-color: #f0f5f5;
+    background-color: #f7f7f7;    
+}
+
+.post-list {
+    background-color: white;
 }
 
 .delete-button {
     float: right;
-    margin-right: 20px;
 }
 
 .body-content {
@@ -24,15 +27,22 @@
 }
 
 .post {
-     border-style: groove;
-     background-color: white;
-     
+    /*border-style: groove;*/
+    /*background-color: #f7f7f7;*/
 }
 
-.post-content {
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
+/*.post-content {
+    margin-top: 10px;
+    position: relative;
+    height: 120px;
+    line-height: 120px;
+    font-size: 1.8em;
+    font-family: helvetica, tahoma;
+    border: 2px solid;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 5px;
+}*/
 
 .post-form {
     margin-bottom: 40px;
@@ -48,10 +58,40 @@
 }
 
 .comment-box {
-    margin-bottom: 50px;    
+    /*margin-bottom: 50px;*/    
 }
 
-.comment {
+/*.comment {
     border-style: groove;
-    background-color: white;
+    background-color: lightgray;
+}*/
+
+/*.comment {
+    margin-top: 10px;
+    margin-left: 40px;
+    position: relative;
+    height: 120px;
+    line-height: 120px;
+    font-size: 1.8em;
+    font-family: helvetica, tahoma;
+    border: 2px solid;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 5px;
+}*/
+
+.comment-form {
+    background-color: #f7f7f7;
+    margin-left: 40px;
+}
+
+h1 {
+    background-color: #f7f7f7;
+}
+
+.creator,
+.creation-date,
+.post-text {
+    margin-left: 20px;
+    margin-right: 20px;
 }

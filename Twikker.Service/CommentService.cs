@@ -24,11 +24,9 @@ namespace Twikker.Service
 
         public IEnumerable<Comment> GetByPostId(int postId)
         {
-            var comments = this.context.Comments
-                .Where(p => p.PostId == postId);
-
             return
-                comments;
+                this.context.Comments
+                .Where(p => p.PostId == postId);
         }
 
         public Comment GetById(int commentId)

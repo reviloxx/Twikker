@@ -26,22 +26,18 @@ export default class Comment extends React.Component {
         if (this.props.activeUserId == this.props.creatorId) {
             return (
                 <div className="comment">
-                    <div className="post-content">
-                        <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
-                        <h4 className="creator">{this.props.creator}</h4>
-                        <h6 className="creation-date">{this.props.creationDate}</h6>
-                        <h6 className="post-text">{this.props.children}</h6>
-                    </div>
+                    <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
+                    <h4 className="creator">{this.props.creator}</h4>
+                    <h6 className="creation-date">{this.props.creationDate}</h6>
+                    <h6 className="comment-text">{this.props.children}</h6>
                 </div>
             );
         } else {
             return (
                 <div className="comment">
-                    <div className="post-content">
-                        <h4 className="creator">{this.props.creator}</h4>
-                        <h6 className="creation-date">{this.props.creationDate}</h6>
-                        <h6 className="post-text">{this.props.children}</h6>
-                    </div>
+                    <h4 className="creator">{this.props.creator}</h4>
+                    <h6 className="creation-date">{this.props.creationDate}</h6>
+                    <h6 className="comment-text">{this.props.children}</h6>
                 </div>
             );
         }

@@ -21,14 +21,14 @@ export default class Post extends React.Component {
     }    
 
     componentDidMount() {
-        postId = this.props.postId;        
-        //$(document).ready(function () {
-        //    console.log(postId);
-        //    $('#delete-button' + postId).hide();
-        //    $("#post" + postId).hover(function () {
-        //        $('#delete-button' + postId).fadeToggle(100);
-        //    });
-        //});
+        $(document).ready(function () {
+            $('.post').mouseenter(function () {
+                $(this).children('.delete-button').fadeIn(100);
+            });
+            $('.post').mouseleave(function () {
+                $(this).children('.delete-button').fadeOut(100);
+            });
+        });
     };
 
     render() {

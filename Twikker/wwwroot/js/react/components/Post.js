@@ -1,9 +1,9 @@
 ﻿import React from 'react';
+var postId = 0;
 
 export default class Post extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {postId: -1}
     }
 
     handleDeleteClick(e) {
@@ -21,21 +21,20 @@ export default class Post extends React.Component {
     }    
 
     componentDidMount() {
-        var postId = this.state.postId;
-        console.log(postId);
-        $(document).ready(function () {
-            
-            //$('#delete-button' + postId).hide();
-            //$(".post").hover(function () {
-            //    $(".delete-button").fadeToggle(100);
-            //});
-        });
+        postId = this.props.postId;        
+        //$(document).ready(function () {
+        //    console.log(postId);
+        //    $('#delete-button' + postId).hide();
+        //    $("#post" + postId).hover(function () {
+        //        $('#delete-button' + postId).fadeToggle(100);
+        //    });
+        //});
     };
 
     render() {
         if (this.props.activeUserId == this.props.creatorId) {
             return (
-                <div className="post">
+                <div id={`post${this.props.postId}`} className="post">
                     <button id={ `delete-button${this.props.postId}` } className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
                     <h2 className="creator">{this.props.creator}</h2>                        
                     <h4 className="creation-date">{this.props.creationDate}</h4>
@@ -44,7 +43,7 @@ export default class Post extends React.Component {
             );
         } else {
             return (
-                <div className="post">
+                <div id={`post${this.props.postId}`} className="post">
                     <h2 className="creator">{this.props.creator}</h2>
                     <h4 className="creation-date">{this.props.creationDate}</h4>
                     <h4 className="post-text">{this.props.children}</h4>

@@ -18,27 +18,37 @@ export default class Post extends React.Component {
             this.props.onDeletedPost();
         }.bind(this);
         xhr.send(data);
-    }
+    }    
 
-    
+    componentDidMount() {
+        var postId = this.state.postId;
+        console.log(postId);
+        $(document).ready(function () {
+            
+            //$('#delete-button' + postId).hide();
+            //$(".post").hover(function () {
+            //    $(".delete-button").fadeToggle(100);
+            //});
+        });
+    };
 
     render() {
         if (this.props.activeUserId == this.props.creatorId) {
             return (
                 <div className="post">
-                        <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
-                        <h2 className="creator">{this.props.creator}</h2>                        
-                        <h4 className="creation-date">{this.props.creationDate}</h4>
-                        <h4 className="post-text">{this.props.children}</h4>  
-                    </div>
+                    <button id={ `delete-button${this.props.postId}` } className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
+                    <h2 className="creator">{this.props.creator}</h2>                        
+                    <h4 className="creation-date">{this.props.creationDate}</h4>
+                    <h4 className="post-text">{this.props.children}</h4>
+                </div>
             );
         } else {
             return (
                 <div className="post">
-                        <h2 className="creator">{this.props.creator}</h2>
-                        <h4 className="creation-date">{this.props.creationDate}</h4>
-                        <h4 className="post-text">{this.props.children}</h4>
-                    </div>
+                    <h2 className="creator">{this.props.creator}</h2>
+                    <h4 className="creation-date">{this.props.creationDate}</h4>
+                    <h4 className="post-text">{this.props.children}</h4>
+                </div>
             );
         }        
     }

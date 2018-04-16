@@ -40,7 +40,7 @@ export default class CommentForm extends React.Component {
                     value={this.state.content}
                     onChange={this.handleTextChange.bind(this)}
                 />
-                <input className="comment-button btn-success" type="submit" value="Comment" />
+                <input className="comment-button btn-success" type="submit" value="Reply" />
             </form>
         );
     }

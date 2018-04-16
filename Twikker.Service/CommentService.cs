@@ -39,6 +39,7 @@ namespace Twikker.Service
         public void Remove(int commentId)
         {
             this.context.Remove(this.GetById(commentId));
+            this.context.SaveChanges();
         }
     }
 }

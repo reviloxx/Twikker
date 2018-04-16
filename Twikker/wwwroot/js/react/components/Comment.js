@@ -6,23 +6,23 @@ export default class Comment extends React.Component {
     //    this.state = { commentId: this }
     //}
 
-    //handleDeleteClick(e) {
-    //    e.preventDefault();
-    //    console.log("Delete Post: " + this.props.postId);
-    //    var data = new FormData();
-    //    data.append('postId', this.props.postId)
+    handleDeleteClick(e) {
+        e.preventDefault();
+        console.log("Delete Comment: " + this.props.commentId);
+        var data = new FormData();
+        data.append('commentId', this.props.commentId)
 
-    //    var xhr = new XMLHttpRequest();
-    //    xhr.open('post', "posts/delete", true);
-    //    xhr.onload = function () {
-    //        this.props.onDeletedPost();
-    //    }.bind(this);
-    //    xhr.send(data);
-    //}
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', "comments/delete", true);
+        xhr.onload = function () {
+        }.bind(this);
+        xhr.send(data);
+    }
 
 
 
     render() {
+        console.log("Active: " + this.props.activeUserId + " Creator: " + this.props.creatorId);
         if (this.props.activeUserId == this.props.creatorId) {
             return (
                 <div className="comment">

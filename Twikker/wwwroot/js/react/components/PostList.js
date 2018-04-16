@@ -8,7 +8,7 @@ export default class PostList extends React.Component {
         this.state = {
             posts: this.props.data.posts
         }
-    }
+    }    
 
     render() {
         console.log('PostList ' + this.props.data.posts);
@@ -23,7 +23,7 @@ export default class PostList extends React.Component {
                         activeUserId={this.props.data.activeUserId}
                         key={post.postId} >
                         {post.content}
-                    </Post>
+                    </Post>                    
                     <CommentBox postId={post.postId}
                         onChangedComment={this.props.onChangedComment}
                         activeUserId={this.props.data.activeUserId}

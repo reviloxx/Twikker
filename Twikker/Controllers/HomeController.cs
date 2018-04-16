@@ -127,5 +127,14 @@ namespace Twikker.Controllers
 
             return Content("Success :");
         }
+
+        [Route("comments/delete")]
+        [HttpPost]
+        public IActionResult DeleteComment(DeleteCommentModel comment)
+        {
+            this.comments.Remove(comment.CommentId);
+
+            return Content("Success :");
+        }
     }
 }

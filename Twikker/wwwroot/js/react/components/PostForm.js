@@ -32,16 +32,35 @@ export default class PostForm extends React.Component {
     }
 
     render() {
-        return (
-            <form className="post-form" onSubmit={this.handleSubmit.bind(this)} >
-                <textarea className="form-control" rows="5"
-                    type="text"
-                    placeholder="Say something..."
-                    value={this.state.content}
-                    onChange={this.handleTextChange.bind(this)}
-                />
-                <input className="post-button btn-success" type="submit" value="Post" />
-            </form>
-        );
+        if (this.state.content.length > 0) {
+            return (
+                <form className="post-form" onSubmit={this.handleSubmit.bind(this)} >
+                    <textarea className="form-control" rows="5"
+                        type="text"
+                        maxLength={300}
+                        placeholder="Say something..."
+                        value={this.state.content}
+                        onChange={this.handleTextChange.bind(this)}
+                    />
+                    <input className="post-button btn-success" type="submit" value="Post" />
+                    <p className="char-counter">
+                        {300 - this.state.content.length}
+                    </p>
+                </form>
+            );
+        } else {
+            return (
+                <form className="post-form" onSubmit={this.handleSubmit.bind(this)} >
+                    <textarea className="form-control" rows="5"
+                        type="text"
+                        maxLength={300}
+                        placeholder="Say something..."
+                        value={this.state.content}
+                        onChange={this.handleTextChange.bind(this)}
+                    />                
+                    <input className="post-button btn-success" type="submit" value="Post" />
+                </form>
+            );
+        }
     }
 }

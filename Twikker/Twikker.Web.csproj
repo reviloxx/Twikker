@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\js\react\dist\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

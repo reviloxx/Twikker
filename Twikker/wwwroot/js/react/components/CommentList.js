@@ -14,7 +14,7 @@ export default class CommentList extends React.Component {
         var commentNodes = this.props.comments.map(function (comment) {
             return (
                 <Comment commentId={comment.commentId}
-                    onDeletedPost={this.props.onDeletedComment}
+                    onDeletedComment={this.props.onDeletedComment}
                     creator={comment.creatorNickname}
                     creatorId={comment.creatorId}
                     creationDate={comment.creationDate}

@@ -23,8 +23,8 @@ export default class PostBox extends React.Component {
             return (
                 <div className="post-box" >
                     <h1>Latest Posts</h1>
-                    <PostForm onAddedPost={() => this.getPosts()} onChangedComment={() => this.getPosts()}/>
-                    <PostList onDeletedPost={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} />                    
+                    <PostForm onAddedPost={this.props.onPostsChanged} />
+                    <PostList onDeletedPost={this.props.onPostsChanged} onChangedComment={this.props.onPostsChanged} activeUserId={this.state.activeUserId} posts={this.state.posts} />                    
                 </div>
             );
         }

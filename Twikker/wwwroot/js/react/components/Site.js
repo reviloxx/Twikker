@@ -36,9 +36,15 @@ export default class Site extends React.Component {
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
             this.setState({
+                currentPage: null
+            });
+            this.setState({
+                activeUserId: data.activeUserId
+            });
+            this.setState({
                 activeUserId: data.activeUserId,
                 posts: data.posts,
-                currentPage: <PostBox activeUserId={data.activeUserId} posts={data.posts} />
+                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={data.activeUserId} posts={data.posts} />
             });
         }.bind(this);
         xhr.send();
@@ -47,36 +53,26 @@ export default class Site extends React.Component {
     sendLogout() {
         var xhr = new XMLHttpRequest();
         xhr.open('post', '/logout', true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            this.setState({ activeUserId: data });
+        xhr.onload = function() {
+            this.getPosts();
         }.bind(this);
         xhr.send();
     }
     
-    handleLogin() {
-        this.getActiveUserId();       
-        this.setState({ currentPage: <PostBox activeUserId={this.state.activeUserId} posts={this.state.posts} /> })      
-    }
-
-    handleRegistration() {
-        this.setState({ currentPage: <PostBox activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
-    }   
-    
     onItemClickedCallback(identifier) {
         switch (identifier) {
             case "Home":
-                this.setState({ currentPage: <PostBox activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
                 break;
             case "Register":
-                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.handleRegistration()} /> })
+                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts()} /> })
                 break;
             case "Logout":
                 this.sendLogout();
-                this.setState({ currentPage: <PostBox activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
                 break;
             case "Login":
-                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.handleLogin()} /> })
+                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getPosts()} /> })
                 break;
         }        
     }

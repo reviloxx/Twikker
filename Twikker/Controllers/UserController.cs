@@ -18,11 +18,6 @@ namespace Twikker.Web.Controllers
             this.users = users;
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         [Route("register")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
@@ -39,14 +34,9 @@ namespace Twikker.Web.Controllers
             });
 
             ModelState.Clear();
-            ViewBag.Message = user.NickName + " is successfully registered!";            
+            ViewBag.Message = user.NickName + " is successfully registered!";
 
-            return View();
-        }
-
-        public IActionResult Login()
-        {
-            return View();
+            return Content("Success :");
         }
 
         [Route("login")]
@@ -76,7 +66,6 @@ namespace Twikker.Web.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
             return Json(loggedIn ? activeUserId : -1);
         }

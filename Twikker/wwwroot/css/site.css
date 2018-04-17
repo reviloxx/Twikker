@@ -2,6 +2,29 @@
     background-color: lightgray;    
 }
 
+#logo {
+    position: fixed;
+    top: 60px;
+    right: 40px;
+    width: 150px;
+}
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #808080;
+    border-top-style: groove;
+}
+
+#copyright{
+    margin-top: 5px;
+    margin-left: 5px;
+    color: white;
+    
+}
 
 .delete-button {
     float: right;
@@ -11,9 +34,8 @@
 }
 
 .body-content {
-    margin-top: 75px;
     max-width: 800px;
-    
+    margin-top: 100px;
 }
 
 .login-form {
@@ -34,7 +56,7 @@
     border: 1px solid;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
 }
 
@@ -48,13 +70,13 @@
 
 .comment {
     margin-top: 19px;
-    margin-left: 40px;
+    margin-left: 70px;
     position: relative;
     font-size: 1.8em;
     border: 1px solid;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: white;
 }
 
@@ -82,7 +104,7 @@
 
 .comment-form {
     margin-top: 5px;
-    margin-left: 40px;
+    margin-left: 70px;
 }
 
 .creator,

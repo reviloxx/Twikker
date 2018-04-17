@@ -14,7 +14,8 @@ export default class Comment extends React.Component {
 
         var xhr = new XMLHttpRequest();
         xhr.open('post', "comments/delete", true);
-        xhr.onload = function () {
+        xhr.onload = function() {
+            this.props.onDeletedComment();
         }.bind(this);
         xhr.send(data);
     }
@@ -31,7 +32,6 @@ export default class Comment extends React.Component {
     };
 
     render() {
-        console.log(this.props.activeUserId + ' ' + this.props.creatorId);
         if (this.props.activeUserId == this.props.creatorId) {
             return (
                 <div className="comment">

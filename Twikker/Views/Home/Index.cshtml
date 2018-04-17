@@ -1,6 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Http
-<div id="root"></div>
-
-@section Scripts {
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Twikker</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+</head>
+<body>
+    <img id="logo" src="~/Images/twitler.png" align="top" />
+    <div id="root"></div>
+    <footer>
+        <p id="copyright">&copy; 2018 - Twitler</p>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/react/dist/bundle.js"></script>
-}
+</body>
+</html>

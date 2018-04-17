@@ -6,13 +6,13 @@ export default class PostList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: this.props.data.posts
+            activeUserId: this.props.activeUserId,
+            posts: this.props.posts
         }
     }    
 
     render() {
-        console.log('PostList ' + this.props.data.posts);
-        var postNodes = this.props.data.posts.map(function (post) {
+        var postNodes = this.state.posts.map(function (post) {
             return (
                 <div className="post-list">
                     <Post postId={post.postId}
@@ -20,13 +20,13 @@ export default class PostList extends React.Component {
                         creator={post.creatorNickname}
                         creatorId={post.creatorId}
                         creationDate={post.creationDate}
-                        activeUserId={this.props.data.activeUserId}
+                        activeUserId={this.props.activeUserId}
                         key={post.postId} >
                         {post.content}
                     </Post>                    
                     <CommentBox postId={post.postId}
                         onChangedComment={this.props.onChangedComment}
-                        activeUserId={this.props.data.activeUserId}
+                        activeUserId={this.props.activeUserId}
                         comments={post.comments}
                         key={post.postId} >
                     </CommentBox>

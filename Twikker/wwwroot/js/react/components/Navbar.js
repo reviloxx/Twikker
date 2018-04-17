@@ -4,43 +4,50 @@ export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false
+            activeUserId: this.props.activeUserId
         }
     }
 
-    componentDidMount() {
-        if (this.props.activeUserId > -1) {
-            this.setState({ loggedIn: true });
-        } else {
-            this.setState({ loggedIn: false });
+    componentWillReceiveProps() {
+        this.state = {
+            activeUserId: this.props.activeUserId
         }
     }
 
     render() {
-        return (
-            <ul className="nav navbar-nav" >
-                <a class="navbar-brand" href="#" onClick={this.props.onHomeClick}>Twikker</a>
-                <li><a href="#" onClick={this.props.onHomeClick}>Home</a></li>
-                <li><a href="#" onClick={this.props.onRegisterClick}>Register</a></li>
-                <li><a href="#" onClick={this.props.onLogoutClick}>Logout</a></li>
-                <li><a href="#" onClick={this.props.onLoginClick}>Login</a></li>
-            </ul>
+        if (this.state.activeUserId > -1) {
+            return (
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                        </div>
+                        <div id="navbar" class="navbar">
+                            <ul className="nav navbar-nav" >
+                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
+                                <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
+                                <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Logout")}>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             );
-
-
-        //if (this.props.activeUserId > -1) {
-        //    return (
-        //        <ul className="nav navbar-nav" >
-        //            <li><a onClick={this.props.onHomeClick}>Home</a></li>
-        //            <li><a onClick={this.props.onLogoutClick}>Logout</a></li>
-        //        </ul>);
-        //} else {
-        //    return (
-        //        <ul className="nav navbar-nav" >
-        //            <li><a onClick={this.props.onHomeClick}>Home</a></li>
-        //            <li><a>Register</a></li>
-        //            <li><a onClick={this.props.onLoginClick}> Login</a></li>
-        //        </ul>);
-        //}
+        } else {
+            return (
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                        </div>
+                        <div id="navbar" class="navbar">
+                            <ul className="nav navbar-nav" >
+                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
+                                <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
+                                <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Register")}>Register</a></li>
+                                <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Login")}>Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            );
+        }        
     }
 }

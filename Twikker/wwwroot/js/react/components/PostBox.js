@@ -6,43 +6,32 @@ export default class PostBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeUserId: -1,
-            data: {
-                posts: [{ comments: [] }]
-            }
+            activeUserId: this.props.activeUserId,
+            posts: this.props.posts            
+        }
+    }    
+
+    componentWillReceiveProps() {
+        this.state = {
+            activeUserId: this.props.activeUserId,
+            posts: this.props.posts            
         }
     }
 
-    componentWillMount() {
-        this.getPosts();
-        console.log(this.state);
-    }
-
-    getPosts() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', this.props.url, true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            console.log(data);
-            this.setState({ data: data });
-        }.bind(this);
-        xhr.send();
-    }
-
     render() {
-        if (this.state.data.activeUserId > -1) {
+        if (this.state.activeUserId > -1) {
             return (
                 <div className="post-box" >
                     <h1>Latest Posts</h1>
                     <PostForm onAddedPost={() => this.getPosts()} onChangedComment={() => this.getPosts()}/>
-                    <PostList onDeletedPost={() => this.getPosts()} data={this.state.data} />                    
+                    <PostList onDeletedPost={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} />                    
                 </div>
             );
         }
         return (
             <div className="post-box" >
                 <h1>Latest Posts</h1>
-                <PostList data={this.state.data} />
+                <PostList activeUserId={this.state.activeUserId} posts={this.state.posts} />
             </div>
         );
     }

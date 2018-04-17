@@ -19,10 +19,19 @@ export default class Comment extends React.Component {
         xhr.send(data);
     }
 
-
+    componentDidMount() {
+        $(document).ready(function () {
+            $('.comment').mouseenter(function () {
+                $(this).children('.delete-button').fadeIn(100);
+            });
+            $('.comment').mouseleave(function () {
+                $(this).children('.delete-button').fadeOut(100);
+            });
+        });
+    };
 
     render() {
-        console.log("Active: " + this.props.activeUserId + " Creator: " + this.props.creatorId);
+        console.log(this.props.activeUserId + ' ' + this.props.creatorId);
         if (this.props.activeUserId == this.props.creatorId) {
             return (
                 <div className="comment">

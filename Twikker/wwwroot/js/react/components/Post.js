@@ -34,8 +34,8 @@ export default class Post extends React.Component {
     render() {
         if (this.props.activeUserId == this.props.creatorId) {
             return (
-                <div id={`post${this.props.postId}`} className="post">
-                    <button id={ `delete-button${this.props.postId}` } className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
+                <div className="post">
+                    <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
                     <h2 className="creator">{this.props.creator}</h2>                        
                     <h4 className="creation-date">{this.props.creationDate}</h4>
                     <h4 className="post-text">{this.props.children}</h4>
@@ -43,7 +43,7 @@ export default class Post extends React.Component {
             );
         } else {
             return (
-                <div id={`post${this.props.postId}`} className="post">
+                <div className="post">
                     <h2 className="creator">{this.props.creator}</h2>
                     <h4 className="creation-date">{this.props.creationDate}</h4>
                     <h4 className="post-text">{this.props.children}</h4>

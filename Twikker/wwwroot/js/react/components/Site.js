@@ -22,7 +22,7 @@ export default class Site extends React.Component {
 
     getActiveUserId() {
         var xhr = new XMLHttpRequest();
-        xhr.open('get', '/getActiveUserId', true);
+        xhr.open('get', '/user/get', true);
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
             this.setState({ activeUserId: data });
@@ -32,7 +32,7 @@ export default class Site extends React.Component {
 
     getPosts() {
         var xhr = new XMLHttpRequest();
-        xhr.open('get', "/getPosts", true);
+        xhr.open('get', "/posts/get", true);
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
             this.setState({
@@ -52,7 +52,7 @@ export default class Site extends React.Component {
 
     sendLogout() {
         var xhr = new XMLHttpRequest();
-        xhr.open('post', '/logout', true);
+        xhr.open('post', '/user/logout', true);
         xhr.onload = function() {
             this.getPosts();
         }.bind(this);

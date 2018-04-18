@@ -16,9 +16,19 @@ export default class LoginForm extends React.Component {
         data.append('Password', this.state.password);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('post', "login", true);
+        xhr.open('post', "user/login", true);
         xhr.onload = function () {
-            this.props.onLoggedIn();
+            var data = JSON.parse(xhr.responseText);
+            if (data.successful) {
+                this.props.onLoggedIn();
+            } else {
+                alert("Login failed");
+                this.setState({
+                    nickName: '',
+                    password: ''
+                });
+            }
+            
         }.bind(this);
         xhr.send(data);
     }
@@ -36,7 +46,7 @@ export default class LoginForm extends React.Component {
             <form className="login-form" onSubmit={this.handleSubmit.bind(this)} >
                 <input className="form-control"
                     type="text"
-                    placeholder="Nickname"
+                    placeholder="Nickname or Email"
                     value={this.state.nickName}
                     onChange={this.handleNickNameChange.bind(this)}
                 />

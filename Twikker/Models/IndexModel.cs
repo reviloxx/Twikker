@@ -47,6 +47,6 @@ namespace Twikker.Web.Models
 
     public class ReactionModel
     {
-
+        public ReactionType Reaction { get; set; }
     }
 }

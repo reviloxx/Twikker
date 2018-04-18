@@ -25,11 +25,17 @@ namespace Twikker.Service
         {
             return this.context.Users;
         }
-
+                
         public User GetById(int userId)
         {
             return this.GetAll()
                 .FirstOrDefault(u => u.UserId == userId);
+        }
+
+        public User GetByEmail(string email)
+        {
+            return this.GetAll()
+                .FirstOrDefault(u => u.Email == email);
         }
 
         public User GetByNickname(string nickname)

@@ -5,6 +5,7 @@ export default class RegistrationForm extends React.Component {
         super(props);
         this.state = {
             nickName: '',
+            eMail: '',
             password: ''
         };
     }
@@ -13,18 +14,31 @@ export default class RegistrationForm extends React.Component {
         e.preventDefault();
         var data = new FormData();
         data.append('NickName', this.state.nickName);
+        data.append('Email', this.state.eMail);
         data.append('Password', this.state.password);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('post', "register", true);
+        xhr.open('post', "user/register", true);
         xhr.onload = function () {
-            this.props.onRegistered();
+            var data = JSON.parse(xhr.responseText);
+
+            if (data.successful) {
+                this.props.onRegistered();
+            } else {
+                alert(data.responseData);
+            }
+
+            
         }.bind(this);
         xhr.send(data);
     }
 
     handleNickNameChange(e) {
         this.setState({ nickName: e.target.value });
+    }
+
+    handleEMailChange(e) {
+        this.setState({ eMail: e.target.value });
     }
 
     handlePasswordChange(e) {
@@ -41,6 +55,12 @@ export default class RegistrationForm extends React.Component {
                     onChange={this.handleNickNameChange.bind(this)}
                 />
                 <input className="form-control"
+                    type="text"
+                    placeholder="E-Mail"
+                    value={this.state.eMail}
+                    onChange={this.handleEMailChange.bind(this)}
+                />
+                <input className="form-control"
                     type="password"
                     placeholder="Password"
                     value={this.state.password}
@@ -49,5 +69,5 @@ export default class RegistrationForm extends React.Component {
                 <input type="submit" value="Register" />
             </form>
         );
-    }
+    }    
 }

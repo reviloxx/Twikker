@@ -30,16 +30,7 @@ namespace Twikker.Controllers
             return View();
         }
 
-        [Route("getActiveUserId")]
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult GetActiveUserId()
-        {
-            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
-            return Json(loggedIn ? activeUserId : -1);
-        }
-
-
-        [Route("getPosts")]
+        [Route("posts/get")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult GetPosts()
         {
@@ -106,7 +97,6 @@ namespace Twikker.Controllers
             }
             
             return Json(new JSONResponse(true));
-            //return RedirectToAction("Index");
         }
 
         [Route("comments/add")]

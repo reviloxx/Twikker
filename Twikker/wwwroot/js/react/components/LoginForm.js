@@ -45,7 +45,7 @@ export default class LoginForm extends React.Component {
         return (
             <form className="login-form" onSubmit={this.handleSubmit.bind(this)} >
                 <div className="form-group">
-                    <label>Nickname or E-mail</label>
+                    <label>Nickname or E-Mail</label>
                     <input className="form-control"
                         type="text"
                         value={this.state.nickName}

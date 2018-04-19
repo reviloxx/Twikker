@@ -89,7 +89,7 @@ export default class Site extends React.Component {
     render() {
         return (
             <div>
-                <Navbar activeUserId={this.state.user.userId} onItemClicked={(identifier) => this.onItemClickedCallback(identifier)} />
+                <Navbar user={this.state.user} onItemClicked={(identifier) => this.onItemClickedCallback(identifier)} />
                 <div id="body-content" className="container body-content">
                     {this.state.currentPage}
                 </div>

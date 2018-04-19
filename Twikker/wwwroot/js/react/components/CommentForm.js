@@ -42,7 +42,7 @@ export default class CommentForm extends React.Component {
                         value={this.state.content}
                         onChange={this.handleTextChange.bind(this)}
                     />
-                    <input className="reply-button btn-success" type="submit" value="Reply" />
+                    <input className="reply-button btn-info" type="submit" value="Send" />
                     <p className="char-counter">
                         {300 - this.state.content.length}
                     </p>
@@ -58,7 +58,6 @@ export default class CommentForm extends React.Component {
                         value={this.state.content}
                         onChange={this.handleTextChange.bind(this)}
                     />
-                    <input className="reply-button btn-success" type="submit" value="Reply" />
                 </form>
             );
         }

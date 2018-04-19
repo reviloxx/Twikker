@@ -46,26 +46,32 @@ export default class RegistrationForm extends React.Component {
     }
 
     render() {
-        return (
+        return (            
             <form className="registration-form" onSubmit={this.handleSubmit.bind(this)} >
-                <input className="form-control"
-                    type="text"
-                    placeholder="Nickname"
-                    value={this.state.nickName}
-                    onChange={this.handleNickNameChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="text"
-                    placeholder="E-Mail"
-                    value={this.state.eMail}
-                    onChange={this.handleEMailChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange.bind(this)}
-                />
+                <div className="form-group">
+                    <label>Nickname</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.nickName}
+                        onChange={this.handleNickNameChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>E-Mail</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.eMail}
+                        onChange={this.handleEMailChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input className="form-control"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handlePasswordChange.bind(this)}
+                    />
+                </div>
                 <input type="submit" value="Register" />
             </form>
         );

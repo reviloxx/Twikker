@@ -42,7 +42,7 @@ export default class PostForm extends React.Component {
                         value={this.state.content}
                         onChange={this.handleTextChange.bind(this)}
                     />
-                    <input className="post-button btn-success" type="submit" value="Post" />
+                    <input className="post-button btn-info" type="submit" value="Send" />
                     <p className="char-counter">
                         {300 - this.state.content.length}
                     </p>
@@ -58,7 +58,6 @@ export default class PostForm extends React.Component {
                         value={this.state.content}
                         onChange={this.handleTextChange.bind(this)}
                     />                
-                    <input className="post-button btn-success" type="submit" value="Post" />
                 </form>
             );
         }

@@ -54,7 +54,7 @@ namespace Twikker.Web.Controllers
         {           
             if (!this.regexUtilities.IsValidNickname(user.NickName))
             {
-                return Json(new JSONResponse(false, "Invalid Nickname!"));
+                return Json(new JSONResponse(false, "Invalid Nickname! Must contain 3 to 20 characters."));
             }
 
             if (!this.regexUtilities.IsValidEmail(user.Email))
@@ -93,6 +93,47 @@ namespace Twikker.Web.Controllers
         [HttpPost]
         public IActionResult Update(UserAccountModel user)
         {
+            if (user.FirstName == null)
+            {
+                user.FirstName = string.Empty;
+            }
+
+            if (user.LastName == null)
+            {
+                user.LastName = string.Empty;
+            }
+
+            if (!int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId))
+            {
+                return Json(new JSONResponse(false, "Unexpected Error"));
+            }
+
+            if (!this.regexUtilities.IsValidNickname(user.NickName))
+            {
+                return Json(new JSONResponse(false, "Invalid Nickname! Must contain 3 to 20 characters."));
+            }
+
+            if (!this.regexUtilities.IsValidEmail(user.Email))
+            {
+                return Json(new JSONResponse(false, "Invalid Email address!"));
+            }
+
+            if (this.users.GetByEmail(user.Email) != null && this.users.GetById(activeUserId).Email != user.Email)
+            {
+                return Json(new JSONResponse(false, "This Email address is already in use!"));
+            }
+
+            this.users.Update(new Data.Models.User()
+            {
+                UserId = activeUserId,
+                NickName = user.NickName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth,
+                Password = this.users.GetById(activeUserId).Password
+            });
+
             return Json(new JSONResponse(true));
         }
 

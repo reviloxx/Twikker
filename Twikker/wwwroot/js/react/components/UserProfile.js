@@ -5,10 +5,10 @@ export default class UserProfile extends React.Component {
         super(props);
         this.state = {
             nickname: this.props.user.nickName,
-            firstname: this.props.user.firstname,
-            lastname: this.props.user.lastname,
+            firstname: this.props.user.firstName,
+            lastname: this.props.user.lastName,
             email: this.props.user.email,
-            dateofbirth: this.props.user.dateofbirth,
+            dateofbirth: this.props.user.dateOfBirth,
         };
 
         console.log(this.props.user);
@@ -49,7 +49,7 @@ export default class UserProfile extends React.Component {
     }
 
     handleLastNameChange(e) {
-        this.setState({ firstname: e.target.value });
+        this.setState({ lastname: e.target.value });
     }
 
     handleEmailChange(e) {
@@ -61,39 +61,50 @@ export default class UserProfile extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <form className="userprofile-form" onSubmit={this.handleSubmit.bind(this)} >
-                <input className="form-control"
-                    type="text"
-                    placeholder="Nickname"
-                    value={this.state.nickname}
-                    onChange={this.handleNickNameChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="text"
-                    placeholder="Firstname"
-                    value={this.state.firstname}
-                    onChange={this.handleFirstNameChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="text"
-                    placeholder="Lastname"
-                    value={this.state.lastname}
-                    onChange={this.handleLastNameChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="text"
-                    placeholder="E-Mail"
-                    value={this.state.email}
-                    onChange={this.handleEmailChange.bind(this)}
-                />
-                <input className="form-control"
-                    type="text"
-                    placeholder="Date of birth"
-                    value={this.state.dateofbirth}
-                    onChange={this.handleDateOfBirthChange.bind(this)}
-                />
-                <input type="submit" value="Update" />
+                <div className="form-group">
+                    <label>Nickname</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.nickname}
+                        onChange={this.handleNickNameChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Firstname</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.firstname}
+                        onChange={this.handleFirstNameChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Lastname</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.lastname}
+                        onChange={this.handleLastNameChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>E-Mail</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.email}
+                        onChange={this.handleEmailChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Date of birth</label>
+                    <input className="form-control"
+                        type="text"
+                        value={this.state.dateofbirth}
+                        onChange={this.handleDateOfBirthChange.bind(this)}
+                    />                    
+                </div>
+                <input type="submit" value="Update Profile" />
             </form>
         );
     }    

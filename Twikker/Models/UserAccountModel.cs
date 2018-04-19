@@ -8,6 +8,7 @@ namespace Twikker.Web.Models
         public UserAccountModel()
         {
             this.UserId = -1;
+            this.LastName = string.Empty;
         }
 
         public int UserId { get; set; }

@@ -12,6 +12,7 @@ namespace Twikker.Data
         User GetById(int userId);
         User GetByNickname(string nickname);
         User GetByEmail(string email);
+        void Update(User updatedUser);
         void Remove(int userId);
     }
 }

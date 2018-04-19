@@ -47,7 +47,7 @@ namespace Twikker.Web
 
         public bool IsValidNickname(string nickname)
         {
-            if (nickname == null)
+            if (nickname == null || nickname.Length < 3 || nickname.Length > 20)
             {
                 return false;
             }

@@ -44,6 +44,20 @@ namespace Twikker.Service
                 .FirstOrDefault(u => u.NickName == nickname);
         }
 
+        public void Update(User updatedUser)
+        {
+            var user = this.GetById(updatedUser.UserId);
+            user.NickName = updatedUser.NickName;
+            user.FirstName = updatedUser.FirstName;
+            user.LastName = updatedUser.LastName;
+            user.Email = updatedUser.Email;
+            user.DateOfBirth = updatedUser.DateOfBirth;
+            //updatedUser.Password = this.GetById(updatedUser.UserId).Password;
+            //this.Remove(updatedUser.UserId);
+            //this.Add(updatedUser);
+            this.context.SaveChanges();
+        }
+
         public void Remove(int userId)
         {
             this.context.Remove(this.GetById(userId));

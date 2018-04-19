@@ -60,7 +60,7 @@ export default class LoginForm extends React.Component {
                         onChange={this.handlePasswordChange.bind(this)}
                     />
                 </div>
-                <input type="submit" value="Login" />
+                <input className="button" type="submit" value="Login" />
             </form>
         );
     }

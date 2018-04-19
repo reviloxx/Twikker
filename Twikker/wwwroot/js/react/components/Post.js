@@ -8,16 +8,18 @@ export default class Post extends React.Component {
 
     handleDeleteClick(e) {
         e.preventDefault();
-        console.log("Delete Post: " + this.props.postId);
-        var data = new FormData();
-        data.append('postId', this.props.postId)
+        if (confirm("Are you sure to delete this post?")) {
+            console.log("Delete Post: " + this.props.postId);
+            var data = new FormData();
+            data.append('postId', this.props.postId)
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "posts/delete", true);
-        xhr.onload = function () {
-            this.props.onDeletedPost();
-        }.bind(this);
-        xhr.send(data);
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', "posts/delete", true);
+            xhr.onload = function () {
+                this.props.onDeletedPost();
+            }.bind(this);
+            xhr.send(data);
+        }        
     }    
 
     componentDidMount() {

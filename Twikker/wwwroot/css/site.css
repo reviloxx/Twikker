@@ -1,5 +1,19 @@
 ﻿body {
-    background-color: lightgray;    
+    /*background-color: lightgray;*/    
+    background-image: url('../Images/black_wood.jpg');
+    color: white;
+}
+
+.navbar {
+    background-color: #003e80;
+}
+
+.button {
+    color: black;
+}
+
+.navbar-brand {
+    color: white !important;
 }
 
 #logo {
@@ -7,6 +21,7 @@
     top: 60px;
     right: 40px;
     width: 150px;
+    visibility: hidden;
 }
 
 footer {
@@ -15,8 +30,8 @@ footer {
     bottom: 0px;
     height: 30px;
     width: 100%;
-    background: #808080;
-    border-top-style: groove;
+    background: black;
+    visibility: hidden;
 }
 
 #copyright{
@@ -59,7 +74,8 @@ footer {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 3px;
-    background-color: white;
+    background-color: #e6f2ff;
+    color: black;
 }
 
 .post-form {
@@ -79,7 +95,8 @@ footer {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 3px;
-    background-color: white;
+    background-color: #e6f2ff;
+    color: black;
 }
 
 .comment:before {
@@ -93,16 +110,16 @@ footer {
     border-color: transparent transparent black black;
 }
 
-.comment:after {
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: 31px;
-    top: -19px;
-    border: 10px solid;
-    border-color: transparent transparent #fff #fff;
-}
+    .comment:after {
+        content: ' ';
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 31px;
+        top: -19px;
+        border: 10px solid;
+        border-color: transparent transparent #e6f2ff #e6f2ff;
+    }
 
 .comment-form {
     margin-top: 5px;

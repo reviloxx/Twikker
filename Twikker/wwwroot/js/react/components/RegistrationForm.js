@@ -72,7 +72,7 @@ export default class RegistrationForm extends React.Component {
                         onChange={this.handlePasswordChange.bind(this)}
                     />
                 </div>
-                <input type="submit" value="Register" />
+                <input className="button" type="submit" value="Register" />
             </form>
         );
     }    

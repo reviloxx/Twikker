@@ -104,7 +104,7 @@ export default class UserProfile extends React.Component {
                         onChange={this.handleDateOfBirthChange.bind(this)}
                     />                    
                 </div>
-                <input type="submit" value="Update Profile" />
+                <input className="button" type="submit" value="Update Profile" />
             </form>
         );
     }    

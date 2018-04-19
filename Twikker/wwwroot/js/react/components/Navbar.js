@@ -17,13 +17,13 @@ export default class Navbar extends React.Component {
     render() {
         if (this.state.activeUserId > -1) {
             return (
-                <nav class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
+                <nav className="navbar navbar-inverse navbar-fixed-top">
+                    <div className="container">
                         <div class="navbar-header">
                         </div>
-                        <div id="navbar" class="navbar">
-                            <ul className="nav navbar-nav" >
-                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twitler</a>
+                        <div>
+                            <ul className="nav navbar-nav">
+                                <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twitler</a>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Profile")}>User Profile</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Logout")}>Logout</a></li>
@@ -34,13 +34,13 @@ export default class Navbar extends React.Component {
             );
         } else {
             return (
-                <nav class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
+                <nav className="navbar navbar-inverse navbar-fixed-top">
+                    <div className="container">
+                        <div className="navbar-header">
                         </div>
-                        <div id="navbar" class="navbar">
+                        <div>
                             <ul className="nav navbar-nav" >
-                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twitler</a>
+                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Register")}>Register</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Login")}>Login</a></li>

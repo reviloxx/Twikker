@@ -47,7 +47,7 @@ export default class RegistrationForm extends React.Component {
 
     render() {
         return (
-            <form className="login-form" onSubmit={this.handleSubmit.bind(this)} >
+            <form className="registration-form" onSubmit={this.handleSubmit.bind(this)} >
                 <input className="form-control"
                     type="text"
                     placeholder="Nickname"

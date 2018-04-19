@@ -38,8 +38,10 @@ footer {
     margin-top: 100px;
 }
 
+.registration-form,
+.userprofile-form,
 .login-form {
-    max-width: 200px;
+    max-width: 300px;
 }
 
 #navbar {

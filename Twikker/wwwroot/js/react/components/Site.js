@@ -4,28 +4,38 @@ import PostBox from './PostBox';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import Navbar from './Navbar';
+import UserProfile from './UserProfile';
 
 export default class Site extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeUserId: -1,
+            user: {
+                userId: -1,
+                nickname: '',
+                firstname: '',
+                lastname: '',
+                email: '',
+                dateofbirth: ''
+            },
             posts: [{ comments: [] }],
             currentPage: null
         }
     }    
 
     componentWillMount() {
-        this.getActiveUserId();
+        this.getActiveUser();
         this.getPosts();             
     }
 
-    getActiveUserId() {
+    getActiveUser() {
         var xhr = new XMLHttpRequest();
         xhr.open('get', '/user/get', true);
         xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            this.setState({ activeUserId: data });
+            var data = JSON.parse(xhr.responseText);            
+            this.setState({
+                user: data
+            });
         }.bind(this);
         xhr.send();
     }
@@ -39,12 +49,8 @@ export default class Site extends React.Component {
                 currentPage: null
             });
             this.setState({
-                activeUserId: data.activeUserId
-            });
-            this.setState({
-                activeUserId: data.activeUserId,
                 posts: data.posts,
-                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={data.activeUserId} posts={data.posts} />
+                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={data.posts} />
             });
         }.bind(this);
         xhr.send();
@@ -53,8 +59,8 @@ export default class Site extends React.Component {
     sendLogout() {
         var xhr = new XMLHttpRequest();
         xhr.open('post', '/user/logout', true);
-        xhr.onload = function() {
-            this.getPosts();
+        xhr.onload = function () {
+            this.componentWillMount();
         }.bind(this);
         xhr.send();
     }
@@ -62,17 +68,20 @@ export default class Site extends React.Component {
     onItemClickedCallback(identifier) {
         switch (identifier) {
             case "Home":
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
                 break;
             case "Register":
                 this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts()} /> })
                 break;
             case "Logout":
                 this.sendLogout();
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.activeUserId} posts={this.state.posts} /> })
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
                 break;
             case "Login":
-                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getPosts()} /> })
+                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.componentWillMount()} /> })
+                break;
+            case "Profile":
+                this.setState({ currentPage: <UserProfile onUpdated={() => this.componentWillMount()} user={this.state.user} /> })
                 break;
         }        
     }
@@ -80,7 +89,7 @@ export default class Site extends React.Component {
     render() {
         return (
             <div>
-                <Navbar activeUserId={this.state.activeUserId} onItemClicked={(identifier) => this.onItemClickedCallback(identifier)} />
+                <Navbar activeUserId={this.state.user.userId} onItemClicked={(identifier) => this.onItemClickedCallback(identifier)} />
                 <div id="body-content" className="container body-content">
                     {this.state.currentPage}
                 </div>

@@ -5,6 +5,11 @@ namespace Twikker.Web.Models
 {
     public class UserAccountModel
     {
+        public UserAccountModel()
+        {
+            this.UserId = -1;
+        }
+
         public int UserId { get; set; }
 
         [Required(ErrorMessage ="Nickname is required.")]
@@ -25,6 +30,6 @@ namespace Twikker.Web.Models
 
         [Compare("Password", ErrorMessage = "Password not match.")]
         [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }        
     }
 }

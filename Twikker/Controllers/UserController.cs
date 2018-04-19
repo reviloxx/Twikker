@@ -25,10 +25,26 @@ namespace Twikker.Web.Controllers
 
         [Route("user/get")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult GetActiveUserId()
+        public IActionResult GetActive()
         {
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
-            return Json(loggedIn ? activeUserId : -1);
+            UserAccountModel userAccountModel = new UserAccountModel();
+
+            if (loggedIn)
+            {
+                var user = this.users.GetById(activeUserId);
+                userAccountModel = new UserAccountModel()
+                {
+                    UserId = activeUserId,
+                    NickName = user.NickName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    DateOfBirth = user.DateOfBirth
+                };
+            }
+            
+            return Json(userAccountModel);
         }
 
         [Route("user/register")]
@@ -70,6 +86,14 @@ namespace Twikker.Web.Controllers
             ViewBag.Message = user.NickName + " is successfully registered!";
 
             return Json(new JSONResponse(true, "user registered"));
+        }
+
+        [Route("user/update")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        [HttpPost]
+        public IActionResult Update(UserAccountModel user)
+        {
+            return Json(new JSONResponse(true));
         }
 
         [Route("user/login")]

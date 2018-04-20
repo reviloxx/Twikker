@@ -139,13 +139,18 @@ footer {
 }
 
 .reaction-button {
-    width: 20px;
-    margin-left: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
 }
 
-.reaction-counter {    
-    float: left;
-    margin-left: 5px;
+.reaction-icon {
+    width: 20px;
+}
+
+.reaction-counter {
+    margin-right: 5px;   
+    margin-bottom: 2px;
 }
 
 .post-list {

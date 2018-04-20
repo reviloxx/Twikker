@@ -16,6 +16,7 @@ export default class PostList extends React.Component {
             return (
                 <div className="post-list">
                     <Post textId={post.userTextId}
+                        postId={post.postId}
                         onDeletedPost={this.props.onDeletedPost}
                         creator={post.creatorNickname}
                         creatorId={post.creatorId}

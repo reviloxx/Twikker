@@ -112,8 +112,8 @@ namespace Twikker.Controllers
 
             try
             {
-                this.reactions.RemoveByTextId(userTextId);
                 this.reactions.Remove(userTextId);
+                this.posts.Remove(model.PostId);
             }
             catch
             {
@@ -165,6 +165,17 @@ namespace Twikker.Controllers
                 UserText = this.userTexts.GetById(reaction.TextId),
                 ReactionType = ReactionType.like
             });
+            return Content("Success :");
+        }
+
+        [Route("reactions/delete")]
+        [HttpPost]
+        public IActionResult DeleteReaction(AddReactionModel reaction)
+        {
+            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+
+            this.reactions.Remove(reaction.TextId, userId);
+            
             return Content("Success :");
         }
     }

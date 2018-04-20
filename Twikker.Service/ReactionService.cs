@@ -37,15 +37,24 @@ namespace Twikker.Service
                 .FirstOrDefault(r => r.ReactionId == reactionId);
         }
 
-        public void RemoveByTextId(int textId)
+        public void Remove(int textId, int activeUserId)
         {
             this.context.RemoveRange(this.context.Reactions
-                .Where(r => r.UserText.UserTextId == textId));               
+                .Where(r => r.UserText.UserTextId == textId && r.Creator.UserId == activeUserId));
+            this.context.SaveChanges();
         }
 
-        public void Remove(int reactionId)
+        public void Remove(int textId)
         {
-            this.context.Remove(this.GetById(reactionId));
+            this.context.RemoveRange(this.context.Reactions
+                .Where(r => r.UserText.UserTextId == textId));
+            this.context.SaveChanges();
         }
+
+        //public void RemoveById(int reactionId)
+        //{
+        //    this.context.Remove(this.GetById(reactionId));
+        //    this.context.SaveChanges();
+        //}
     }
 }

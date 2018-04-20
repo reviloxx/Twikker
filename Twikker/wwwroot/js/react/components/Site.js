@@ -39,6 +39,9 @@ export default class Site extends React.Component {
             this.setState({
                 user: data
             });
+            this.setState({
+                user: data
+            });
         }.bind(this);
         xhr.send();
     }

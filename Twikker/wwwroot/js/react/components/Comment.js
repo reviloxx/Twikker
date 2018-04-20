@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Reaction from './Reaction';
 
 export default class Comment extends React.Component {
     //constructor(props) {
@@ -39,6 +40,7 @@ export default class Comment extends React.Component {
                     <h4 className="creator">{this.props.creator}</h4>
                     <h6 className="creation-date">{this.props.creationDate}</h6>
                     <h6 className="comment-text">{this.props.children}</h6>
+                    <Reaction textId={this.props.textId} reactions={this.props.reactions} activeUserId={this.props.activeUserId} />
                 </div>
             );
         } else {
@@ -47,6 +49,7 @@ export default class Comment extends React.Component {
                     <h4 className="creator">{this.props.creator}</h4>
                     <h6 className="creation-date">{this.props.creationDate}</h6>
                     <h6 className="comment-text">{this.props.children}</h6>
+                    <Reaction textId={this.props.textId} reactions={this.props.reactions} activeUserId={this.props.activeUserId} />
                 </div>
             );
         }

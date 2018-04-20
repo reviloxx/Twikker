@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Twikker.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,18 @@ namespace Twikker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserText",
+                columns: table => new
+                {
+                    UserTextId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserText", x => x.UserTextId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -34,7 +46,8 @@ namespace Twikker.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Content = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    CreatorId = table.Column<int>(nullable: false)
+                    CreatorId = table.Column<int>(nullable: false),
+                    UserTextId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,6 +57,40 @@ namespace Twikker.Data.Migrations
                         column: x => x.CreatorId,
                         principalTable: "Users",
                         principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Posts_UserText_UserTextId",
+                        column: x => x.UserTextId,
+                        principalTable: "UserText",
+                        principalColumn: "UserTextId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reactions",
+                columns: table => new
+                {
+                    ReactionId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CreatorUserId = table.Column<int>(nullable: false),
+                    ReactionType = table.Column<int>(nullable: false),
+                    UserTextId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reactions", x => x.ReactionId);
+                    table.ForeignKey(
+                        name: "FK_Reactions_Users_CreatorUserId",
+                        column: x => x.CreatorUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reactions_UserText_UserTextId",
+                        column: x => x.UserTextId,
+                        principalTable: "UserText",
+                        principalColumn: "UserTextId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -56,7 +103,8 @@ namespace Twikker.Data.Migrations
                     Content = table.Column<string>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     CreatorId = table.Column<int>(nullable: false),
-                    PostId = table.Column<int>(nullable: false)
+                    PostId = table.Column<int>(nullable: false),
+                    UserTextId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,41 +121,12 @@ namespace Twikker.Data.Migrations
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reactions",
-                columns: table => new
-                {
-                    ReactionId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CommentId = table.Column<int>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    CreatorUserId = table.Column<int>(nullable: false),
-                    PostId = table.Column<int>(nullable: true),
-                    ReactionType = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reactions", x => x.ReactionId);
                     table.ForeignKey(
-                        name: "FK_Reactions_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "CommentId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reactions_Users_CreatorUserId",
-                        column: x => x.CreatorUserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        name: "FK_Comments_UserText_UserTextId",
+                        column: x => x.UserTextId,
+                        principalTable: "UserText",
+                        principalColumn: "UserTextId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reactions_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -121,14 +140,19 @@ namespace Twikker.Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserTextId",
+                table: "Comments",
+                column: "UserTextId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posts_CreatorId",
                 table: "Posts",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reactions_CommentId",
-                table: "Reactions",
-                column: "CommentId");
+                name: "IX_Posts_UserTextId",
+                table: "Posts",
+                column: "UserTextId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reactions_CreatorUserId",
@@ -136,9 +160,9 @@ namespace Twikker.Data.Migrations
                 column: "CreatorUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reactions_PostId",
+                name: "IX_Reactions_UserTextId",
                 table: "Reactions",
-                column: "PostId");
+                column: "UserTextId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_NickName",
@@ -150,16 +174,19 @@ namespace Twikker.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Reactions");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Reactions");
 
             migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "UserText");
         }
     }
 }

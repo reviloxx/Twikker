@@ -22,20 +22,12 @@ namespace Twikker.Service
             this.context.SaveChanges();
         }
 
-        public IEnumerable<Reaction> GetAll(Post post, int postId)
+        public IEnumerable<Reaction> GetAll(int userTextId)
         {
-            return
-                this.context.Posts
-                .FirstOrDefault(pos => pos.PostId == postId)?
-                .Reactions;
-        }
-
-        public IEnumerable<Reaction> GetAll(Comment comment, int commentId)
-        {
-            return
-                this.context.Comments
-                .FirstOrDefault(com => com.CommentId == commentId)?
-                .Reactions;
+            var reactions = this.context.Reactions
+                .Where(r => r.UserText.UserTextId == userTextId);
+            return reactions;
+                
         }
 
         public Reaction GetById(int reactionId)
@@ -43,6 +35,12 @@ namespace Twikker.Service
             return
                 this.context.Reactions
                 .FirstOrDefault(r => r.ReactionId == reactionId);
+        }
+
+        public void RemoveByTextId(int textId)
+        {
+            this.context.RemoveRange(this.context.Reactions
+                .Where(r => r.UserText.UserTextId == textId));               
         }
 
         public void Remove(int reactionId)

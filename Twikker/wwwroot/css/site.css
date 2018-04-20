@@ -16,14 +16,6 @@
     color: white !important;
 }
 
-#logo {
-    position: fixed;
-    top: 60px;
-    right: 40px;
-    width: 150px;
-    visibility: hidden;
-}
-
 footer {
     position: fixed;
     left: 0px;

@@ -7,8 +7,6 @@ export default class Navbar extends React.Component {
             activeUserId: this.props.user.userId,
             nickName: this.props.user.nickName
         }
-
-        console.log(this.props);
     }
 
     componentWillReceiveProps() {

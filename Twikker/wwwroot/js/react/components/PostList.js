@@ -20,6 +20,7 @@ export default class PostList extends React.Component {
                         creator={post.creatorNickname}
                         creatorId={post.creatorId}
                         creationDate={post.creationDate}
+                        reactions={post.reactions}
                         activeUserId={this.props.activeUserId}
                         key={post.postId} >
                         {post.content}

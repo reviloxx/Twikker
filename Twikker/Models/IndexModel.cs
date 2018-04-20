@@ -17,6 +17,8 @@ namespace Twikker.Web.Models
     {
         public int PostId { get; set; }
 
+        public int UserTextId { get; set; }
+
         public int CreatorId { get; set; }
 
         public string CreatorNickname { get; set; }
@@ -33,6 +35,8 @@ namespace Twikker.Web.Models
     public class CommentModel
     {
         public int CommentId { get; set; }
+
+        public int UserTextId { get; set; }
 
         public int CreatorId { get; set; }
 

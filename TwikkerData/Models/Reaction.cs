@@ -17,6 +17,9 @@ namespace Twikker.Data.Models
 
         [Required]
         public ReactionType ReactionType { get; set; }
+
+        [Required]
+        public virtual UserText UserText { get; set; }
     }
 
     public enum ReactionType

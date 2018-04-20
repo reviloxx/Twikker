@@ -13,7 +13,13 @@ namespace Twikker.Data.Models
         public int CreatorId { get; set; }
 
         [Required]
+        public int UserTextId { get; set; }
+
+        [Required]
         public virtual User Creator { get; set; }
+
+        [Required]
+        public virtual UserText UserText { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }
@@ -23,10 +29,8 @@ namespace Twikker.Data.Models
 
         [Required]
         public virtual Post Post { get; set; }
-
-        [Required]
-        public int PostId { get; set; }
-
-        public virtual IEnumerable<Reaction> Reactions { get; set; }
+        
+        //[Required]
+        //public int PostId { get; set; }
     }
 }

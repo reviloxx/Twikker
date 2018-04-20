@@ -18,7 +18,10 @@ export default class Site extends React.Component {
                 email: '',
                 dateofbirth: ''
             },
-            posts: [{ comments: [] }],
+            posts: [{
+                comments: [],
+                reactions: []
+            }],
             currentPage: null
         }
     }    

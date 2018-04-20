@@ -32,6 +32,7 @@ namespace Twikker.Web
             services.AddSingleton(Configuration);
             services.AddScoped<IComment, CommentService>();
             services.AddScoped<IPost, PostService>();
+            services.AddScoped<IUserText, UserTextService>();
             services.AddScoped<IReaction, ReactionService>();
             services.AddScoped<IUser, UserService>();
             services.AddDbContext<TwikkerContext>(options =>

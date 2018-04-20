@@ -12,8 +12,8 @@ using Twikker.Data.Models;
 namespace Twikker.Data.Migrations
 {
     [DbContext(typeof(TwikkerContext))]
-    [Migration("20180413163428_Initial")]
-    partial class Initial
+    [Migration("20180420082829_initial migration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,15 @@ namespace Twikker.Data.Migrations
 
                     b.Property<int>("PostId");
 
+                    b.Property<int>("UserTextId");
+
                     b.HasKey("CommentId");
 
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserTextId");
 
                     b.ToTable("Comments");
                 });
@@ -55,9 +59,13 @@ namespace Twikker.Data.Migrations
 
                     b.Property<int>("CreatorId");
 
+                    b.Property<int>("UserTextId");
+
                     b.HasKey("PostId");
 
                     b.HasIndex("CreatorId");
+
+                    b.HasIndex("UserTextId");
 
                     b.ToTable("Posts");
                 });
@@ -67,23 +75,19 @@ namespace Twikker.Data.Migrations
                     b.Property<int>("ReactionId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CommentId");
-
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<int>("CreatorUserId");
 
-                    b.Property<int?>("PostId");
-
                     b.Property<int>("ReactionType");
+
+                    b.Property<int>("UserTextId");
 
                     b.HasKey("ReactionId");
 
-                    b.HasIndex("CommentId");
-
                     b.HasIndex("CreatorUserId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("UserTextId");
 
                     b.ToTable("Reactions");
                 });
@@ -115,6 +119,16 @@ namespace Twikker.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Twikker.Data.Models.UserText", b =>
+                {
+                    b.Property<int>("UserTextId")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("UserTextId");
+
+                    b.ToTable("UserText");
+                });
+
             modelBuilder.Entity("Twikker.Data.Models.Comment", b =>
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
@@ -126,6 +140,11 @@ namespace Twikker.Data.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Twikker.Data.Models.UserText", "UserText")
+                        .WithMany()
+                        .HasForeignKey("UserTextId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Twikker.Data.Models.Post", b =>
@@ -134,22 +153,24 @@ namespace Twikker.Data.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Twikker.Data.Models.UserText", "UserText")
+                        .WithMany()
+                        .HasForeignKey("UserTextId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Twikker.Data.Models.Reaction", b =>
                 {
-                    b.HasOne("Twikker.Data.Models.Comment")
-                        .WithMany("Reactions")
-                        .HasForeignKey("CommentId");
-
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Reactions")
                         .HasForeignKey("CreatorUserId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Twikker.Data.Models.Post")
+                    b.HasOne("Twikker.Data.Models.UserText", "UserText")
                         .WithMany("Reactions")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("UserTextId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

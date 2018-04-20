@@ -26,7 +26,7 @@ namespace Twikker.Service
         {
             return
                 this.context.Comments
-                .Where(p => p.PostId == postId);
+                .Where(p => p.Post.PostId == postId);
         }
 
         public Comment GetById(int commentId)

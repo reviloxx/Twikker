@@ -17,12 +17,16 @@ namespace Twikker.Controllers
         private IUser users;
         private IPost posts;
         private IComment comments;
+        private IUserText userTexts;
+        private IReaction reactions;
 
-        public HomeController(IUser users, IPost posts, IComment comments)
+        public HomeController(IUser users, IPost posts, IComment comments,IUserText userTexts, IReaction reactions)
         {
             this.users = users;
             this.posts = posts;
             this.comments = comments;
+            this.userTexts = userTexts;
+            this.reactions = reactions;
         }
         
         public IActionResult Index()
@@ -40,19 +44,31 @@ namespace Twikker.Controllers
                 .Select(post => new PostModel
                 {
                     PostId = post.PostId,
+                    UserTextId = post.UserTextId,
                     CreatorId = post.CreatorId,
                     CreatorNickname = this.users.GetById(post.CreatorId).NickName,
-                    CreationDate = post.CreationDate.ToString("dd.MM.yyyy, H:mm"),
+                    CreationDate = post.CreationDate.ToString("dd.MM.yyyy, H:mm:ss"),
                     Content = post.Content,
+                    Reactions = this.reactions.GetAll(post.UserTextId)?
+                    .Select(reaction => new ReactionModel
+                    {
+                        Reaction = ReactionType.like
+                    }),
                     Comments = this.comments.GetByPostId(post.PostId)?
                         .Select(comment => new CommentModel
                         {
                             CommentId = comment.CommentId,
+                            UserTextId = comment.UserTextId,
                             CreatorId = comment.CreatorId,
                             CreatorNickname = this.users.GetById(comment.CreatorId).NickName,
-                            CreationDate = comment.CreationDate.ToString("dd.MM.yyyy, H:mm"),
-                            Content = comment.Content
-                        })
+                            CreationDate = comment.CreationDate.ToString("dd.MM.yyyy, H:mm:ss"),
+                            Content = comment.Content,
+                            Reactions = this.reactions.GetAll(comment.UserTextId)?
+                            .Select(reaction => new ReactionModel
+                            {
+                                Reaction = ReactionType.like
+                            })
+                        }),                    
                 }).OrderByDescending(p => p.CreationDate);
             
 
@@ -72,24 +88,30 @@ namespace Twikker.Controllers
         public IActionResult AddPost(AddPostModel post)
         {
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            var userText = new Data.Models.UserText();
 
             this.posts.Add(new Data.Models.Post()
             {
                 Content = post.Content,
+                UserText = userText,
                 Creator = this.users.GetById(userId),
+                UserTextId = userText.UserTextId,
                 CreationDate = DateTime.Now                
             });
 
             return Content("Success :");
-        }
+        }       
 
         [Route("posts/delete")]
         [HttpPost]
         public IActionResult DeletePost(DeletePostModel model)
         {
+            int userTextId = this.posts.GetById(model.PostId).UserTextId;
+
             try
             {
-                this.posts.Remove(model.PostId);
+                this.reactions.RemoveByTextId(userTextId);
+                this.reactions.Remove(userTextId);
             }
             catch
             {
@@ -104,13 +126,14 @@ namespace Twikker.Controllers
         public IActionResult AddComment(AddCommentModel comment)
         {
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            var userText = new Data.Models.UserText();
 
             this.comments.Add(new Data.Models.Comment()
             {
                 CreatorId = userId,
                 Content = comment.Content,
+                UserText = userText,
                 Post = this.posts.GetById(comment.PostId),
-                PostId = comment.PostId,
                 Creator = this.users.GetById(userId),
                 CreationDate = DateTime.Now
             });
@@ -124,6 +147,23 @@ namespace Twikker.Controllers
         {
             this.comments.Remove(comment.CommentId);
 
+            return Content("Success :");
+        }
+
+        [Route("reactions/add")]
+        [HttpPost]
+        public IActionResult AddReaction(AddReactionModel reaction)
+        {
+            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+
+            this.reactions.Add(new Data.Models.Reaction()
+            {
+                Creator = this.users.GetById(userId),
+                CreationDate = DateTime.Now,
+                UserText = this.userTexts.GetById(reaction.TextId),
+                ReactionType = ReactionType.like,
+                ReactionId = reaction.TextId
+            });
             return Content("Success :");
         }
     }

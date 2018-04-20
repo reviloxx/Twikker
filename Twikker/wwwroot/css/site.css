@@ -80,7 +80,7 @@ footer {
 
 .comment {
     margin-top: 19px;
-    margin-left: 70px;
+    margin-left: 90px;
     position: relative;
     font-size: 1.8em;
     border: 1px solid;
@@ -115,7 +115,7 @@ footer {
 
 .comment-form {
     margin-top: 5px;
-    margin-left: 70px;
+    margin-left: 90px;
 }
 
 .creator,
@@ -126,12 +126,8 @@ footer {
     margin-right: 20px;
 }
 
+.reply-button,
 .post-button {
-    margin-right: 5px;
-    float: left;
-}
-
-.reply-button {
     margin-right: 5px;
     float: left;
 }
@@ -139,6 +135,17 @@ footer {
 .char-counter {
     margin-top: 4px;
     float:left;
+    color: white;
+}
+
+.reaction-button {
+    width: 20px;
+    margin-left: 3px;
+}
+
+.reaction-counter {    
+    float: left;
+    margin-left: 5px;
 }
 
 .post-list {

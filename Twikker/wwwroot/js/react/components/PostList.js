@@ -15,7 +15,7 @@ export default class PostList extends React.Component {
         var postNodes = this.state.posts.map(function (post) {
             return (
                 <div className="post-list">
-                    <Post postId={post.postId}
+                    <Post textId={post.userTextId}
                         onDeletedPost={this.props.onDeletedPost}
                         creator={post.creatorNickname}
                         creatorId={post.creatorId}

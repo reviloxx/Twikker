@@ -52,7 +52,8 @@ namespace Twikker.Controllers
                     Reactions = this.reactions.GetAll(post.UserTextId)?
                     .Select(reaction => new ReactionModel
                     {
-                        Reaction = ReactionType.like
+                        Reaction = ReactionType.like,
+                        CreatorId = reaction.Creator.UserId
                     }),
                     Comments = this.comments.GetByPostId(post.PostId)?
                         .Select(comment => new CommentModel
@@ -66,7 +67,8 @@ namespace Twikker.Controllers
                             Reactions = this.reactions.GetAll(comment.UserTextId)?
                             .Select(reaction => new ReactionModel
                             {
-                                Reaction = ReactionType.like
+                                Reaction = ReactionType.like,
+                                CreatorId = reaction.Creator.UserId
                             })
                         }),                    
                 }).OrderByDescending(p => p.CreationDate);
@@ -161,8 +163,7 @@ namespace Twikker.Controllers
                 Creator = this.users.GetById(userId),
                 CreationDate = DateTime.Now,
                 UserText = this.userTexts.GetById(reaction.TextId),
-                ReactionType = ReactionType.like,
-                ReactionId = reaction.TextId
+                ReactionType = ReactionType.like
             });
             return Content("Success :");
         }

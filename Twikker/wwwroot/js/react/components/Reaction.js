@@ -9,8 +9,7 @@ export default class Reaction extends React.Component {
             activeUserId: this.props.activeUserId
         }
 
-        console.log(this.props);
-        console.log(this.state);
+        console.log(this.props.reactions);
     }
 
     handleLikeClick(e) {
@@ -35,7 +34,9 @@ export default class Reaction extends React.Component {
             return (
                 <div className="reaction">
                     <p className="reaction-counter">{this.state.reactions.length}</p>
-                    <button className="reaction-button btn-info" onClick={this.handleLikeClick.bind(this)}> Like</button>
+                    <a href="#">
+                        <img className="reaction-button" src="Images/like.png" alt="Like" onClick={this.handleLikeClick.bind(this)} />
+                    </a>
                 </div>
             );
         } else {

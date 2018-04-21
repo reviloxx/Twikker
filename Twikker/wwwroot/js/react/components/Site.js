@@ -27,6 +27,10 @@ export default class Site extends React.Component {
     }    
 
     componentWillMount() {
+        this.getDataUpdateFromServer();
+    }
+
+    getDataUpdateFromServer() {
         this.getActiveUser();
         this.getPosts();
     }
@@ -90,10 +94,10 @@ export default class Site extends React.Component {
                 this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
                 break;
             case "Login":
-                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.componentWillMount()} /> })
+                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getDataUpdateFromServer()} /> })
                 break;
             case "Profile":
-                this.setState({ currentPage: <UserProfile onUpdated={() => this.componentWillMount()} user={this.state.user} /> })
+                this.setState({ currentPage: <UserProfile onUpdated={() => this.getDataUpdateFromServer()} user={this.state.user} /> })
                 break;
         }        
     }

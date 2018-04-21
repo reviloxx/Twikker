@@ -37,18 +37,18 @@ export default class Comment extends React.Component {
             return (
                 <div className="comment">
                     <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
-                    <h4 className="creator">{this.props.creator}</h4>
+                    <h3 className="creator">{this.props.creator}</h3>
                     <h6 className="creation-date">{this.props.creationDate}</h6>
-                    <h6 className="comment-text">{this.props.children}</h6>
+                    <h5 className="comment-text">{this.props.children}</h5>
                     <Reaction textId={this.props.textId} reactions={this.props.reactions} activeUserId={this.props.activeUserId} />
                 </div>
             );
         } else {
             return (
                 <div className="comment">
-                    <h4 className="creator">{this.props.creator}</h4>
+                    <h3 className="creator">{this.props.creator}</h3>
                     <h6 className="creation-date">{this.props.creationDate}</h6>
-                    <h6 className="comment-text">{this.props.children}</h6>
+                    <h5 className="comment-text">{this.props.children}</h5>
                     <Reaction textId={this.props.textId} reactions={this.props.reactions} activeUserId={this.props.activeUserId} />
                 </div>
             );

@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Twikker.Web.Models
 {
-    public class UserAccountModel
+    public class UserModel
     {
-        public UserAccountModel()
+        public UserModel()
         {
             this.UserId = -1;
             this.LastName = string.Empty;

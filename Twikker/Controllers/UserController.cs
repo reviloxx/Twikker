@@ -28,12 +28,12 @@ namespace Twikker.Web.Controllers
         public IActionResult GetActive()
         {
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
-            UserAccountModel userAccountModel = new UserAccountModel();
+            UserModel userAccountModel = new UserModel();
 
             if (loggedIn)
             {
                 var user = this.users.GetById(activeUserId);
-                userAccountModel = new UserAccountModel()
+                userAccountModel = new UserModel()
                 {
                     UserId = activeUserId,
                     NickName = user.NickName,
@@ -50,7 +50,7 @@ namespace Twikker.Web.Controllers
         [Route("user/register")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
-        public IActionResult Register(UserAccountModel user)
+        public IActionResult Register(UserModel user)
         {           
             if (!this.regexUtilities.IsValidNickname(user.NickName))
             {
@@ -82,16 +82,13 @@ namespace Twikker.Web.Controllers
                 Password = user.Password
             });
 
-            ModelState.Clear();
-            ViewBag.Message = user.NickName + " is successfully registered!";
-
-            return Json(new JSONResponse(true, "user registered"));
+            return Json(new JSONResponse(true, "You are successfully registered as " + user.NickName + "!"));
         }
 
         [Route("user/update")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
-        public IActionResult Update(UserAccountModel user)
+        public IActionResult Update(UserModel user)
         {
             if (user.FirstName == null)
             {
@@ -140,7 +137,7 @@ namespace Twikker.Web.Controllers
         [Route("user/login")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
-        public IActionResult Login(UserAccountModel user)
+        public IActionResult Login(UserModel user)
         {
             var account = this.users.GetByNickname(user.NickName);
 

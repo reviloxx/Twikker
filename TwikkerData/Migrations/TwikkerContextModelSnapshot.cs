@@ -76,7 +76,7 @@ namespace Twikker.Data.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<int>("CreatorUserId");
+                    b.Property<int>("CreatorId");
 
                     b.Property<int>("ReactionType");
 
@@ -84,7 +84,7 @@ namespace Twikker.Data.Migrations
 
                     b.HasKey("ReactionId");
 
-                    b.HasIndex("CreatorUserId");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("UserTextId");
 
@@ -163,7 +163,7 @@ namespace Twikker.Data.Migrations
                 {
                     b.HasOne("Twikker.Data.Models.User", "Creator")
                         .WithMany("Reactions")
-                        .HasForeignKey("CreatorUserId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Twikker.Data.Models.UserText", "UserText")

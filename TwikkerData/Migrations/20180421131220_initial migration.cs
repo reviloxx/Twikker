@@ -73,7 +73,7 @@ namespace Twikker.Data.Migrations
                     ReactionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    CreatorUserId = table.Column<int>(nullable: false),
+                    CreatorId = table.Column<int>(nullable: false),
                     ReactionType = table.Column<int>(nullable: false),
                     UserTextId = table.Column<int>(nullable: false)
                 },
@@ -81,8 +81,8 @@ namespace Twikker.Data.Migrations
                 {
                     table.PrimaryKey("PK_Reactions", x => x.ReactionId);
                     table.ForeignKey(
-                        name: "FK_Reactions_Users_CreatorUserId",
-                        column: x => x.CreatorUserId,
+                        name: "FK_Reactions_Users_CreatorId",
+                        column: x => x.CreatorId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -155,9 +155,9 @@ namespace Twikker.Data.Migrations
                 column: "UserTextId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reactions_CreatorUserId",
+                name: "IX_Reactions_CreatorId",
                 table: "Reactions",
-                column: "CreatorUserId");
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reactions_UserTextId",

@@ -23,6 +23,7 @@ export default class RegistrationForm extends React.Component {
             var data = JSON.parse(xhr.responseText);
 
             if (data.successful) {
+                alert(data.responseData);
                 this.props.onRegistered();
             } else {
                 alert(data.responseData);

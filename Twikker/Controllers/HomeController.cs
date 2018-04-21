@@ -53,7 +53,7 @@ namespace Twikker.Controllers
                     .Select(reaction => new ReactionModel
                     {
                         Reaction = ReactionType.like,
-                        CreatorId = reaction.Creator.UserId
+                        CreatorId = reaction.CreatorId
                     }),
                     Comments = this.comments.GetByPostId(post.PostId)?
                         .Select(comment => new CommentModel
@@ -68,7 +68,7 @@ namespace Twikker.Controllers
                             .Select(reaction => new ReactionModel
                             {
                                 Reaction = ReactionType.like,
-                                CreatorId = reaction.Creator.UserId
+                                CreatorId = reaction.CreatorId
                             })
                         }),                    
                 }).OrderByDescending(p => p.CreationDate);
@@ -87,7 +87,7 @@ namespace Twikker.Controllers
 
         [Route("posts/add")]
         [HttpPost]
-        public IActionResult AddPost(AddPostModel post)
+        public IActionResult AddPost(PostModel post)
         {
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
             var userText = new Data.Models.UserText();
@@ -106,7 +106,7 @@ namespace Twikker.Controllers
 
         [Route("posts/delete")]
         [HttpPost]
-        public IActionResult DeletePost(DeletePostModel model)
+        public IActionResult DeletePost(PostModel model)
         {
             int userTextId = this.posts.GetById(model.PostId).UserTextId;
 
@@ -125,7 +125,7 @@ namespace Twikker.Controllers
 
         [Route("comments/add")]
         [HttpPost]
-        public IActionResult AddComment(AddCommentModel comment)
+        public IActionResult AddComment(CommentModel comment)
         {
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
             var userText = new Data.Models.UserText();
@@ -145,7 +145,7 @@ namespace Twikker.Controllers
 
         [Route("comments/delete")]
         [HttpPost]
-        public IActionResult DeleteComment(DeleteCommentModel comment)
+        public IActionResult DeleteComment(CommentModel comment)
         {
             this.comments.Remove(comment.CommentId);
 
@@ -154,23 +154,27 @@ namespace Twikker.Controllers
 
         [Route("reactions/add")]
         [HttpPost]
-        public IActionResult AddReaction(AddReactionModel reaction)
+        public IActionResult AddReaction(ReactionModel reaction)
         {
+            // TODO: Session timeout
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
-
-            this.reactions.Add(new Data.Models.Reaction()
+            var newReaction = (new Data.Models.Reaction()
             {
                 Creator = this.users.GetById(userId),
+                CreatorId = userId,
                 CreationDate = DateTime.Now,
                 UserText = this.userTexts.GetById(reaction.TextId),
+                UserTextId = reaction.TextId,
                 ReactionType = ReactionType.like
             });
+
+            this.reactions.Add(newReaction);
             return Content("Success :");
         }
 
         [Route("reactions/delete")]
         [HttpPost]
-        public IActionResult DeleteReaction(AddReactionModel reaction)
+        public IActionResult DeleteReaction(ReactionModel reaction)
         {
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
 

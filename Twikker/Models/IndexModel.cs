@@ -11,48 +11,5 @@ namespace Twikker.Web.Models
         public int activeUserId { get; set; }
 
         public IEnumerable<PostModel> Posts { get; set; }        
-    }
-
-    public class PostModel
-    {
-        public int PostId { get; set; }
-
-        public int UserTextId { get; set; }
-
-        public int CreatorId { get; set; }
-
-        public string CreatorNickname { get; set; }
-
-        public string CreationDate { get; set; }
-
-        public string Content { get; set; }
-
-        public IEnumerable<ReactionModel> Reactions { get; set; }
-
-        public IEnumerable<CommentModel> Comments { get; set; }        
-    }
-
-    public class CommentModel
-    {
-        public int CommentId { get; set; }
-
-        public int UserTextId { get; set; }
-
-        public int CreatorId { get; set; }
-
-        public string CreatorNickname { get; set; }
-
-        public string CreationDate { get; set; }
-
-        public string Content { get; set; }        
-
-        public IEnumerable<ReactionModel> Reactions { get; set; }
-    }
-
-    public class ReactionModel
-    {
-        public ReactionType Reaction { get; set; }
-
-        public int CreatorId { get; set; }
-    }
+    }      
 }

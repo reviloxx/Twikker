@@ -10,6 +10,12 @@ namespace Twikker.Data.Models
         public int ReactionId { get; set; }
 
         [Required]
+        public int CreatorId { get; set; }
+
+        [Required]
+        public int UserTextId { get; set; }
+
+        [Required]
         public virtual User Creator { get; set; }
 
         [Required]

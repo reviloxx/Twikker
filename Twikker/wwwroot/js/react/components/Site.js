@@ -28,7 +28,7 @@ export default class Site extends React.Component {
 
     componentWillMount() {
         this.getActiveUser();
-        this.getPosts();             
+        this.getPosts();
     }
 
     getActiveUser() {
@@ -52,7 +52,12 @@ export default class Site extends React.Component {
         xhr.onload = function () {
             var data = JSON.parse(xhr.responseText);
             this.setState({
+                posts: data.posts,
                 currentPage: null
+            });
+            this.setState({
+                posts: data.posts,
+                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={data.posts} />
             });
             this.setState({
                 posts: data.posts,
@@ -74,6 +79,7 @@ export default class Site extends React.Component {
     onItemClickedCallback(identifier) {
         switch (identifier) {
             case "Home":
+                this.getPosts();
                 this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
                 break;
             case "Register":

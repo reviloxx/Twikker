@@ -22,8 +22,10 @@ export default class Site extends React.Component {
                 comments: [],
                 reactions: []
             }],
+
+            postLoadCount: 100,
             currentPage: null
-        }
+        };
     }    
 
     componentWillMount() {
@@ -32,7 +34,7 @@ export default class Site extends React.Component {
 
     getDataUpdateFromServer() {
         this.getActiveUser();
-        this.getPosts();
+        this.getPosts(true);
     }
 
     getActiveUser() {
@@ -50,25 +52,35 @@ export default class Site extends React.Component {
         xhr.send();
     }
 
-    getPosts() {
+    getPosts(refresh) {
+        var data = new FormData();
+
+        if (refresh) {
+            data.append('StartIndex', 0);
+            data.append('Count', Math.max(this.state.posts.length, this.state.postLoadCount));
+        }
+        
         var xhr = new XMLHttpRequest();
-        xhr.open('get', "/posts/get", true);
+        xhr.open('post', "/posts/get", true);
         xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            this.setState({
-                posts: data.posts,
-                currentPage: null
-            });
-            this.setState({
-                posts: data.posts,
-                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={data.posts} />
-            });
-            this.setState({
-                posts: data.posts,
-                currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={data.posts} />
-            });
+            var response = JSON.parse(xhr.responseText);
+
+            if (refresh) {
+                this.setState({
+                    posts: response.posts,
+                    currentPage: null
+                });
+                this.setState({
+                    posts: response.posts,
+                    currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={response.posts} />
+                });
+                this.setState({
+                    posts: response.posts,
+                    currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={response.posts} />
+                });
+            }
         }.bind(this);
-        xhr.send();
+        xhr.send(data);
     }
 
     sendLogout() {
@@ -83,21 +95,21 @@ export default class Site extends React.Component {
     onItemClickedCallback(identifier) {
         switch (identifier) {
             case "Home":
-                this.getPosts();
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
+                this.getPosts(true);
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={this.state.posts} /> });
                 break;
             case "Register":
-                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts()} /> })
+                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts(true)} /> });
                 break;
             case "Logout":
                 this.sendLogout();
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts()} activeUserId={this.state.user.userId} posts={this.state.posts} /> })
+                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={this.state.posts} /> });
                 break;
             case "Login":
-                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getDataUpdateFromServer()} /> })
+                this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getDataUpdateFromServer()} /> });
                 break;
             case "Profile":
-                this.setState({ currentPage: <UserProfile onUpdated={() => this.getDataUpdateFromServer()} user={this.state.user} /> })
+                this.setState({ currentPage: <UserProfile onUpdated={() => this.getDataUpdateFromServer()} user={this.state.user} /> });
                 break;
         }        
     }
@@ -111,5 +123,6 @@ export default class Site extends React.Component {
                 </div>
             </div>
         );
-    }    
+    }       
 }
+Site.displayName = 'Site';

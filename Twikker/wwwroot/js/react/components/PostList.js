@@ -8,7 +8,7 @@ export default class PostList extends React.Component {
         this.state = {
             activeUserId: this.props.activeUserId,
             posts: this.props.posts
-        }
+        };
     }    
 
     render() {
@@ -23,15 +23,16 @@ export default class PostList extends React.Component {
                         creationDate={post.creationDate}
                         reactions={post.reactions}
                         activeUserId={this.props.activeUserId}
-                        key={post.postId} >
+                        key={post.postId}
+                    >
                         {post.content}
                     </Post>                    
                     <CommentBox postId={post.postId}
                         onChangedComment={this.props.onChangedComment}
                         activeUserId={this.props.activeUserId}
                         comments={post.comments}
-                        key={post.postId} >
-                    </CommentBox>
+                        key={post.postId}
+                    />
                 </div>
             );
         }.bind(this));
@@ -42,3 +43,4 @@ export default class PostList extends React.Component {
         );
     }
 }
+PostList.displayName = 'PostList';

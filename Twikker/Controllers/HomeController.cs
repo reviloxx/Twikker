@@ -35,8 +35,8 @@ namespace Twikker.Controllers
         }
 
         [Route("posts/get")]
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult GetPosts()
+        [HttpPost]
+        public IActionResult GetPosts(GetPostsRequest postsRequest)
         {
             var posts = this.posts.GetAll();
 
@@ -70,16 +70,18 @@ namespace Twikker.Controllers
                                 Reaction = ReactionType.like,
                                 CreatorId = reaction.CreatorId
                             })
-                        }),                    
-                }).OrderByDescending(p => p.CreationDate);
-            
+                        }),
+                }).OrderByDescending(p => p.CreationDate)
+                .Skip(postsRequest.StartIndex)
+                .Take(postsRequest.Count);
 
-            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
+
+            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);            
 
             var model = new IndexModel()
             {
                 Posts = postModel,
-                activeUserId = loggedIn ? activeUserId : -1
+                MoreDataAvailable = posts.Count() > postModel.Count()
             };
 
             return Json(model);

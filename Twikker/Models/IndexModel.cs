@@ -8,8 +8,8 @@ namespace Twikker.Web.Models
 {
     public class IndexModel
     {
-        public int activeUserId { get; set; }
+        public IEnumerable<PostModel> Posts { get; set; }
 
-        public IEnumerable<PostModel> Posts { get; set; }        
+        public bool MoreDataAvailable { get; set; }
     }      
 }

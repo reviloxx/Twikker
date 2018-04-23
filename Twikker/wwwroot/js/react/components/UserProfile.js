@@ -8,10 +8,8 @@ export default class UserProfile extends React.Component {
             firstname: this.props.user.firstName,
             lastname: this.props.user.lastName,
             email: this.props.user.email,
-            dateofbirth: this.props.user.dateOfBirth,
+            dateofbirth: this.props.user.dateOfBirth
         };
-
-        console.log(this.props.user);
     }
 
     handleSubmit(e) {
@@ -61,7 +59,6 @@ export default class UserProfile extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <form className="userprofile-form" onSubmit={this.handleSubmit.bind(this)} >
                 <div className="form-group">
@@ -109,3 +106,4 @@ export default class UserProfile extends React.Component {
         );
     }    
 }
+UserProfile.displayName = 'UserProfile';

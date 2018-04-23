@@ -7,7 +7,7 @@ export default class CommentList extends React.Component {
         super(props);
         this.state = {
             comments: this.props.comments
-        }
+        };
     }
 
     render() {
@@ -21,7 +21,8 @@ export default class CommentList extends React.Component {
                     creatorId={comment.creatorId}
                     creationDate={comment.creationDate}
                     activeUserId={this.props.activeUserId}
-                    key={comment.postId}>
+                    key={comment.postId}
+                >
                     {comment.content}
                 </Comment>
             );
@@ -33,3 +34,4 @@ export default class CommentList extends React.Component {
         );
     }
 }
+CommentList.displayName = 'CommentList';

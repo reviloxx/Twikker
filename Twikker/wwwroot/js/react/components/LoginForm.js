@@ -22,7 +22,7 @@ export default class LoginForm extends React.Component {
             if (data.successful) {
                 this.props.onLoggedIn();
             } else {
-                alert("Login failed");
+                alert("Nickname / E-Mail or password wrong.");
                 this.setState({
                     nickName: '',
                     password: ''
@@ -65,3 +65,4 @@ export default class LoginForm extends React.Component {
         );
     }
 }
+LoginForm.displayName = 'LoginForm';

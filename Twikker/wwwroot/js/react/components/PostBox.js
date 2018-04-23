@@ -7,15 +7,15 @@ export default class PostBox extends React.Component {
         super(props);
         this.state = {
             activeUserId: this.props.activeUserId,
-            posts: this.props.posts            
-        }
+            posts: this.props.posts
+        };
     }    
 
     componentWillReceiveProps() {
         this.state = {
             activeUserId: this.props.activeUserId,
-            posts: this.props.posts            
-        }
+            posts: this.props.posts
+        };
     }
 
     render() {
@@ -36,3 +36,4 @@ export default class PostBox extends React.Component {
         );
     }
 }
+PostBox.displayName = 'PostBox';

@@ -4,22 +4,6 @@ import Reaction from './Reaction';
 export default class Post extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    handleDeleteClick(e) {
-        e.preventDefault();
-        if (confirm("Are you sure to delete this post?")) {
-            console.log("Delete Post: " + this.props.postId);
-            var data = new FormData();
-            data.append('postId', this.props.postId)
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('post', "posts/delete", true);
-            xhr.onload = function () {
-                this.props.onDeletedPost();
-            }.bind(this);
-            xhr.send(data);
-        }        
     }    
 
     componentDidMount() {
@@ -31,10 +15,26 @@ export default class Post extends React.Component {
                 $(this).children('.delete-button').fadeOut(100);
             });
         });
-    };
+    }
+
+    handleDeleteClick(e) {
+        e.preventDefault();
+        if (confirm("Are you sure to delete this post?")) {
+            console.log("Delete Post: " + this.props.postId);
+            var data = new FormData();
+            data.append('postId', this.props.postId);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', "posts/delete", true);
+            xhr.onload = function () {
+                this.props.onDeletedPost();
+            }.bind(this);
+            xhr.send(data);
+        }
+    }    
 
     render() {
-        if (this.props.activeUserId == this.props.creatorId) {
+        if (this.props.activeUserId === this.props.creatorId) {
             return (
                 <div className="post">
                     <button className="delete-button btn-danger btn-sm" onClick={this.handleDeleteClick.bind(this)}>Delete</button>
@@ -56,3 +56,4 @@ export default class Post extends React.Component {
         }        
     }
 }
+Post.displayName = 'Post';

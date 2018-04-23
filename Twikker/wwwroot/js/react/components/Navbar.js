@@ -6,16 +6,14 @@ export default class Navbar extends React.Component {
         this.state = {
             activeUserId: this.props.user.userId,
             nickName: this.props.user.nickName
-        }
+        };
     }
 
     componentWillReceiveProps() {
         this.state = {
             activeUserId: this.props.user.userId,
             nickName: this.props.user.nickName
-        }
-
-        console.log(this.props);
+        };
     }
 
     render() {
@@ -23,7 +21,7 @@ export default class Navbar extends React.Component {
             return (
                 <nav className="navbar navbar-inverse navbar-fixed-top">
                     <div className="container">
-                        <div class="navbar-header">
+                        <div className="navbar-header">
                         </div>
                         <div>
                             <ul className="nav navbar-nav">
@@ -44,7 +42,7 @@ export default class Navbar extends React.Component {
                         </div>
                         <div>
                             <ul className="nav navbar-nav" >
-                                <a class="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
+                                <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Register")}>Register</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Login")}>Login</a></li>
@@ -56,3 +54,4 @@ export default class Navbar extends React.Component {
         }        
     }
 }
+Navbar.displayName = 'Navbar';

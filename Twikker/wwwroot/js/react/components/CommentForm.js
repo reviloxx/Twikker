@@ -63,3 +63,4 @@ export default class CommentForm extends React.Component {
         }
     }
 }
+CommentForm.displayName = 'CommentForm';

@@ -9,13 +9,11 @@ export default class Reaction extends React.Component {
             activeUserId: this.props.activeUserId,
             activeUserAlreadyLiked: this.checkIfActiveUserAlreadyLiked(),
             iconSrc: this.checkIfActiveUserAlreadyLiked() ? "Images/liked.png" : "Images/like.png"
-        }
-
-        console.log(this.state);
+        };
     }
 
     checkIfActiveUserAlreadyLiked() {
-        var count = this.props.reactions.filter((e) => e.creatorId == this.props.activeUserId).length;
+        var count = this.props.reactions.filter((e) => e.creatorId === this.props.activeUserId).length;
 
         return count > 0;
     }
@@ -25,9 +23,10 @@ export default class Reaction extends React.Component {
 
         var data = new FormData();
         var xhr = new XMLHttpRequest();
+        var newReactions;
 
         if (this.state.activeUserAlreadyLiked) {
-            var newReactions = this.state.reactions;
+            newReactions = this.state.reactions;
             newReactions.splice(-1, 1);
             this.setState({ reactions: newReactions });
             this.setState({ iconSrc: "Images/like.png" });
@@ -36,7 +35,7 @@ export default class Reaction extends React.Component {
             data.append('textId', this.props.textId);
             xhr.open('post', "reactions/delete", true);
         } else {     
-            var newReactions = this.state.reactions.slice();
+            newReactions = this.state.reactions.slice();
             newReactions.push({ reaction: "like" });
             this.setState({ reactions: newReactions });
             this.setState({ iconSrc: "Images/liked.png" });
@@ -57,22 +56,27 @@ export default class Reaction extends React.Component {
 
         if (this.state.activeUserId > -1) {
             return (
-                <div className="reaction">                    
+                <div className="reaction">
                     <a className="reaction-button" href="#">
                         <img className="reaction-icon" src={this.state.iconSrc} alt="Like" onClick={this.handleLikeClick.bind(this)} />
                     </a>
                     {reactionCounter}
                 </div>
             );
+        } else if (this.state.reactions.length === 0) {
+            return (
+                <div className="reaction"/>
+            );
         } else {
             return (
-                <div className="reaction">                    
+                <div className="reaction">
                     <a className="reaction-button" >
                         <img className="reaction-icon" src={this.state.iconSrc} alt="Like" />
                     </a>
                     {reactionCounter}
                 </div>
             );
-        }        
+        }   
     }
 }
+Reaction.displayName = 'Reaction';

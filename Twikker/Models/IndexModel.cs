@@ -10,6 +10,6 @@ namespace Twikker.Web.Models
     {
         public IEnumerable<PostModel> Posts { get; set; }
 
-        public bool MoreDataAvailable { get; set; }
+        public bool MorePostsAvailable { get; set; }
     }      
 }

@@ -7,33 +7,57 @@ export default class PostBox extends React.Component {
         super(props);
         this.state = {
             activeUserId: this.props.activeUserId,
-            posts: this.props.posts
+            posts: this.props.posts,
+            morePostsAvailable: this.props.morePostsAvailable
         };
     }    
 
     componentWillReceiveProps() {
         this.state = {
             activeUserId: this.props.activeUserId,
-            posts: this.props.posts
+            posts: this.props.posts,
+            morePostsAvailable: this.props.morePostsAvailable
         };
     }
 
     render() {
+        console.log(this.state.morePostsAvailable);
         if (this.state.activeUserId > -1) {
+            if (this.state.morePostsAvailable) {
+                return (
+                    <div className="post-box" >
+                        <h1>Latest Posts</h1>
+                        <PostForm onAddedPost={this.props.onPostsChanged} />
+                        <PostList onDeletedPost={this.props.onPostsChanged} onChangedComment={this.props.onPostsChanged} activeUserId={this.state.activeUserId} posts={this.state.posts} />
+                        <button className="btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="post-box" >
+                        <h1>Latest Posts</h1>
+                        <PostForm onAddedPost={this.props.onPostsChanged} />
+                        <PostList onDeletedPost={this.props.onPostsChanged} onChangedComment={this.props.onPostsChanged} activeUserId={this.state.activeUserId} posts={this.state.posts} />
+                    </div>
+                );
+            }            
+        }
+        if (this.state.morePostsAvailable) {
             return (
                 <div className="post-box" >
                     <h1>Latest Posts</h1>
-                    <PostForm onAddedPost={this.props.onPostsChanged} />
-                    <PostList onDeletedPost={this.props.onPostsChanged} onChangedComment={this.props.onPostsChanged} activeUserId={this.state.activeUserId} posts={this.state.posts} />                    
+                    <PostList activeUserId={this.state.activeUserId} posts={this.state.posts} />
+                    <button className="btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
                 </div>
             );
-        }
-        return (
-            <div className="post-box" >
-                <h1>Latest Posts</h1>
-                <PostList activeUserId={this.state.activeUserId} posts={this.state.posts} />
-            </div>
-        );
+        } else {
+            return (
+                <div className="post-box" >
+                    <h1>Latest Posts</h1>
+                    <PostList activeUserId={this.state.activeUserId} posts={this.state.posts} />
+                </div>
+            );
+        }        
     }
 }
 PostBox.displayName = 'PostBox';

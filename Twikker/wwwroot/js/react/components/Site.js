@@ -15,15 +15,15 @@ export default class Site extends React.Component {
                 nickname: '',
                 firstname: '',
                 lastname: '',
-                email: '',
-                dateofbirth: ''
+                email: ''
             },
             posts: [{
                 comments: [],
                 reactions: []
             }],
 
-            postLoadCount: 100,
+            postLoadCount: 5,
+            morePostsAvailable: false,
             currentPage: null
         };
     }    
@@ -58,27 +58,60 @@ export default class Site extends React.Component {
         if (refresh) {
             data.append('StartIndex', 0);
             data.append('Count', Math.max(this.state.posts.length, this.state.postLoadCount));
+        } else {
+            data.append('StartIndex', this.state.posts.length);
+            data.append('Count', this.state.postLoadCount);
         }
         
         var xhr = new XMLHttpRequest();
         xhr.open('post', "/posts/get", true);
         xhr.onload = function () {
             var response = JSON.parse(xhr.responseText);
-
+            console.log(response);
             if (refresh) {
                 this.setState({
                     posts: response.posts,
+                    morePostsAvailable: response.morePostsAvailable,
                     currentPage: null
                 });
                 this.setState({
                     posts: response.posts,
-                    currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={response.posts} />
+                    morePostsAvailable: response.morePostsAvailable
                 });
                 this.setState({
-                    posts: response.posts,
-                    currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={response.posts} />
+                    posts: response.posts
+                });
+            } else {
+                var newPosts = this.state.posts;
+
+                for (var i = 0; i < response.posts.length; i++) {
+                    newPosts.push(response.posts[i]);
+                }
+
+                this.setState({
+                    posts: newPosts,
+                    morePostsAvailable: response.morePostsAvailable,
+                    currentPage: null
+                });
+                this.setState({
+                    morePostsAvailable: response.morePostsAvailable,
+                    posts: newPosts                    
+                });
+                this.setState({
+                    morePostsAvailable: response.morePostsAvailable,
+                    posts: newPosts
                 });
             }
+            this.setState({
+                currentPage:
+                <PostBox
+                    onPostsChanged={() => this.getPosts(true)}
+                    onRequestMorePosts={() => this.getPosts(false)}
+                    activeUserId={this.state.user.userId}
+                    posts={this.state.posts}
+                    morePostsAvailable={this.state.morePostsAvailable}
+                />
+            });
         }.bind(this);
         xhr.send(data);
     }
@@ -96,14 +129,32 @@ export default class Site extends React.Component {
         switch (identifier) {
             case "Home":
                 this.getPosts(true);
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={this.state.posts} /> });
+                this.setState({
+                    currentPage:
+                    <PostBox
+                        onPostsChanged={() => this.getPosts(true)}
+                        onRequestMorePosts={() => this.getPosts(false)}
+                        activeUserId={this.state.user.userId}
+                        posts={this.state.posts}
+                        morePostsAvailable={this.state.morePostsAvailable}
+                    />
+                });
                 break;
             case "Register":
                 this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts(true)} /> });
                 break;
             case "Logout":
                 this.sendLogout();
-                this.setState({ currentPage: <PostBox onPostsChanged={() => this.getPosts(true)} activeUserId={this.state.user.userId} posts={this.state.posts} /> });
+                this.setState({
+                    currentPage:
+                    <PostBox
+                        onPostsChanged={() => this.getPosts(true)}
+                        onRequestMorePosts={() => this.getPosts(false)}
+                        activeUserId={this.state.user.userId}
+                        posts={this.state.posts}
+                        morePostsAvailable={this.state.morePostsAvailable}
+                    />
+                });
                 break;
             case "Login":
                 this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getDataUpdateFromServer()} /> });

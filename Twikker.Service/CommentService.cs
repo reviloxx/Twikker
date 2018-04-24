@@ -36,6 +36,20 @@ namespace Twikker.Service
                 .FirstOrDefault(c => c.CommentId == commentId);
         }
 
+        public void RemoveByPostId(int postId)
+        {
+            IEnumerable<Comment> toDelete = this.GetByPostId(postId);            
+
+            for (int i = 0; i < toDelete.Count(); i++)
+            {
+                int userTextId = toDelete.ElementAt(i).UserTextId;
+                this.context.Reactions.RemoveRange(this.context.Reactions.Where(r => r.UserTextId == userTextId));
+                this.context.UserText.RemoveRange(this.context.UserText.Where(u => u.UserTextId == userTextId));
+            }
+            
+            this.context.SaveChanges();
+        }
+
         public void Remove(int commentId)
         {
             this.context.Remove(this.GetById(commentId));

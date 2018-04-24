@@ -23,5 +23,13 @@ namespace Twikker.Service
                 this.context.UserText
                     .FirstOrDefault(t => t.UserTextId == userTextId);
         }
+
+        public void Remove(int userTextId)
+        {
+            this.context.UserText
+                .Remove(this.GetById(userTextId));
+
+            this.context.SaveChanges();
+        }
     }
 }

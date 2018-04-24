@@ -76,12 +76,12 @@ namespace Twikker.Controllers
                 .Take(postsRequest.Count);
 
 
-            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);            
+            bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
 
             var model = new IndexModel()
             {
                 Posts = postModel,
-                MoreDataAvailable = posts.Count() > postModel.Count()
+                MorePostsAvailable = postsRequest.StartIndex + postsRequest.Count < posts.Count()
             };
 
             return Json(model);
@@ -108,14 +108,14 @@ namespace Twikker.Controllers
 
         [Route("posts/delete")]
         [HttpPost]
-        public IActionResult DeletePost(PostModel model)
+        public IActionResult DeletePost(PostModel post)
         {
-            int userTextId = this.posts.GetById(model.PostId).UserTextId;
+            int userTextId = this.posts.GetById(post.PostId).UserTextId;
 
             try
-            {
-                this.reactions.Remove(userTextId);
-                this.posts.Remove(model.PostId);
+            {                
+                this.comments.RemoveByPostId(post.PostId);
+                this.userTexts.Remove(userTextId);
             }
             catch
             {
@@ -149,9 +149,18 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult DeleteComment(CommentModel comment)
         {
-            this.comments.Remove(comment.CommentId);
+            int userTextId = this.comments.GetById(comment.CommentId).UserTextId;
 
-            return Content("Success :");
+            try
+            {
+                this.userTexts.Remove(userTextId);
+            }
+            catch
+            {
+                return Json(new JSONResponse(false));
+            }
+
+            return Json(new JSONResponse(true));
         }
 
         [Route("reactions/add")]

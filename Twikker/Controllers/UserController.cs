@@ -39,8 +39,7 @@ namespace Twikker.Web.Controllers
                     NickName = user.NickName,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Email = user.Email,
-                    DateOfBirth = user.DateOfBirth
+                    Email = user.Email
                 };
             }
             
@@ -74,7 +73,6 @@ namespace Twikker.Web.Controllers
 
             this.users.Add(new Data.Models.User()
             {
-                DateOfBirth = user.DateOfBirth,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -127,7 +125,6 @@ namespace Twikker.Web.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                DateOfBirth = user.DateOfBirth,
                 Password = this.users.GetById(activeUserId).Password
             });
 
@@ -170,8 +167,5 @@ namespace Twikker.Web.Controllers
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
             return Json(loggedIn ? activeUserId : -1);
         }
-
-       
-
     }
 }

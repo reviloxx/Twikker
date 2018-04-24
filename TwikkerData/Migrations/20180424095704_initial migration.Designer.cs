@@ -12,7 +12,7 @@ using Twikker.Data.Models;
 namespace Twikker.Data.Migrations
 {
     [DbContext(typeof(TwikkerContext))]
-    [Migration("20180421131220_initial migration")]
+    [Migration("20180424095704_initial migration")]
     partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,8 +96,6 @@ namespace Twikker.Data.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime?>("DateOfBirth");
 
                     b.Property<string>("Email");
 

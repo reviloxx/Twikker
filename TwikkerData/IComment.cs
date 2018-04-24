@@ -11,6 +11,7 @@ namespace Twikker.Data
 
         void Add(Comment newComment);
         Comment GetById(int commentId);
+        void RemoveByPostId(int postId);
         void Remove(int commentId);        
     }
 }

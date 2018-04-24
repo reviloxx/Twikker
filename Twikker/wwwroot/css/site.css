@@ -1,15 +1,10 @@
 ﻿body {
-    /*background-color: lightgray;*/    
     background-image: url('../Images/black_wood.jpg');
     color: white;
 }
 
 .navbar {
     background-color: #003e80;
-}
-
-.button {
-    color: black;
 }
 
 .navbar-brand {

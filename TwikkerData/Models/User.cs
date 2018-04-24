@@ -18,8 +18,6 @@ namespace Twikker.Data.Models
 
         public string Email { get; set; }
 
-        public DateTime? DateOfBirth { get; set; }
-
         public virtual IEnumerable<Post> Posts { get; set; }
 
         public virtual IEnumerable<Comment> Comments { get; set; }

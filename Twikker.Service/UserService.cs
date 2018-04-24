@@ -51,10 +51,6 @@ namespace Twikker.Service
             user.FirstName = updatedUser.FirstName;
             user.LastName = updatedUser.LastName;
             user.Email = updatedUser.Email;
-            user.DateOfBirth = updatedUser.DateOfBirth;
-            //updatedUser.Password = this.GetById(updatedUser.UserId).Password;
-            //this.Remove(updatedUser.UserId);
-            //this.Add(updatedUser);
             this.context.SaveChanges();
         }
 

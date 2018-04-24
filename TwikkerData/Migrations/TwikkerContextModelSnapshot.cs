@@ -96,8 +96,6 @@ namespace Twikker.Data.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateOfBirth");
-
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");

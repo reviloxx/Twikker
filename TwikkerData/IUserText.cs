@@ -8,5 +8,7 @@ namespace Twikker.Data
     public interface IUserText
     {
         UserText GetById(int userTextId);
+
+        void Remove(int userTextId);
     }
 }

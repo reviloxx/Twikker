@@ -93,15 +93,7 @@ export default class UserProfile extends React.Component {
                         onChange={this.handleEmailChange.bind(this)}
                     />
                 </div>
-                <div className="form-group">
-                    <label>Date of birth</label>
-                    <input className="form-control"
-                        type="text"
-                        value={this.state.dateofbirth}
-                        onChange={this.handleDateOfBirthChange.bind(this)}
-                    />                    
-                </div>
-                <input className="button" type="submit" value="Update Profile" />
+                <input className="btn btn-info" type="submit" value="Update Profile" />
             </form>
         );
     }    

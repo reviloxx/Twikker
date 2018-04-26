@@ -1,0 +1,30 @@
+﻿[
+  {
+    "UserId": "1",
+    "Email": "m@m.at",
+    "NickName": "Hans",
+    "Password": "1234"
+  },
+
+  {
+    "UserId": "2",
+    "Email": "1@m.at",
+    "NickName": "Peter",
+    "Password": "1234"
+  },
+
+  {
+    "UserId": "3",
+    "Email": "2@m.at",
+    "NickName": "Franz",
+    "Password": "1234"
+  },
+
+  {
+    "UserId": "4",
+    "Email": "3@m.at",
+    "NickName": "Sissi",
+    "Password": "1234"
+  }
+]
+

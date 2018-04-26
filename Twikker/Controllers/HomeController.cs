@@ -138,6 +138,7 @@ namespace Twikker.Controllers
                 Content = comment.Content,
                 UserText = userText,
                 Post = this.posts.GetById(comment.PostId),
+                PostId = comment.PostId,
                 Creator = this.users.GetById(userId),
                 CreationDate = DateTime.Now
             });

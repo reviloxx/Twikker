@@ -54,6 +54,15 @@ namespace Twikker.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                if (!serviceScope.ServiceProvider.GetService<TwikkerContext>().AllMigrationsApplied())
+                {
+                    serviceScope.ServiceProvider.GetService<TwikkerContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<TwikkerContext>().EnsureSeeded();
+                }
+            }
+
             app.UseStaticFiles();
             app.UseSession();
 

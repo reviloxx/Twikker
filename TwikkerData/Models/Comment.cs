@@ -29,8 +29,8 @@ namespace Twikker.Data.Models
 
         [Required]
         public virtual Post Post { get; set; }
-        
-        //[Required]
-        //public int PostId { get; set; }
+
+        [Required]
+        public int PostId { get; set; }
     }
 }

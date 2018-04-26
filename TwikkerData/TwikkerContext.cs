@@ -21,9 +21,7 @@ namespace Twikker.Data
             builder.Entity<User>()
                 .HasIndex(a => a.NickName)
                 .IsUnique();
-
-
-            //builder.Entity<User>().HasData(new User { NickName = "User1", Email = "user1@blah.at", Password = "1234" });
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

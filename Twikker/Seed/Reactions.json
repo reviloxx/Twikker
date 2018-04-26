@@ -1,0 +1,170 @@
+﻿[
+  {
+    "ReactionId": "1",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "1"
+  },
+  {
+    "ReactionId": "2",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "10"
+  },
+  {
+    "ReactionId": "3",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "5"
+  },
+  {
+    "ReactionId": "4",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "3"
+  },
+  {
+    "ReactionId": "5",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "9"
+  },
+  {
+    "ReactionId": "6",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "2"
+  },
+  {
+    "ReactionId": "7",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "1"
+  },
+  {
+    "ReactionId": "8",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "7"
+  },
+  {
+    "ReactionId": "9",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "6"
+  },
+  {
+    "ReactionId": "10",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "5"
+  },
+  {
+    "ReactionId": "11",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "12"
+  },
+  {
+    "ReactionId": "12",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "13"
+  },
+  {
+    "ReactionId": "13",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "20"
+  },
+  {
+    "ReactionId": "14",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "14"
+  },
+  {
+    "ReactionId": "15",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "1",
+    "ReactionType": "0",
+    "UserTextId": "18"
+  },
+  {
+    "ReactionId": "16",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "18"
+  },
+  {
+    "ReactionId": "17",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "20"
+  },
+  {
+    "ReactionId": "18",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "2",
+    "ReactionType": "0",
+    "UserTextId": "19"
+  },
+  {
+    "ReactionId": "19",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "17"
+  },
+  {
+    "ReactionId": "20",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "16"
+  },
+  {
+    "ReactionId": "21",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "3",
+    "ReactionType": "0",
+    "UserTextId": "15"
+  },
+  {
+    "ReactionId": "22",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "14"
+  },
+  {
+    "ReactionId": "23",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "13"
+  },
+  {
+    "ReactionId": "24",
+    "CreationDate": "2018-04-26 10:25:51",
+    "CreatorId": "4",
+    "ReactionType": "0",
+    "UserTextId": "12"
+  }
+]

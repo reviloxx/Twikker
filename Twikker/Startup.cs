@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Twikker.Data;
 using Twikker.Service;
 
@@ -35,6 +36,10 @@ namespace Twikker.Web
             services.AddScoped<IUserText, UserTextService>();
             services.AddScoped<IReaction, ReactionService>();
             services.AddScoped<IUser, UserService>();
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddSeq(Configuration.GetSection("Seq"));
+            });
             services.AddDbContext<TwikkerContext>(options =>
                   options.UseSqlite(this.Configuration.GetConnectionString("TwikkerConnection")));
 
@@ -44,15 +49,8 @@ namespace Twikker.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            app.UseBrowserLink();
+            app.UseDeveloperExceptionPage();                       
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -70,7 +68,7 @@ namespace Twikker.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}");
             });
         }
     }

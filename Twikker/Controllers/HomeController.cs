@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Twikker.Data;
 using Twikker.Data.Models;
 using Twikker.Web;
@@ -14,14 +15,17 @@ namespace Twikker.Controllers
 {
     public class HomeController : Controller
     {
+        readonly ILogger<HomeController> log;
+
         private IUser users;
         private IPost posts;
         private IComment comments;
         private IUserText userTexts;
         private IReaction reactions;
 
-        public HomeController(IUser users, IPost posts, IComment comments,IUserText userTexts, IReaction reactions)
+        public HomeController(ILogger<HomeController> log, IUser users, IPost posts, IComment comments,IUserText userTexts, IReaction reactions)
         {
+            this.log = log;
             this.users = users;
             this.posts = posts;
             this.comments = comments;
@@ -31,6 +35,7 @@ namespace Twikker.Controllers
         
         public IActionResult Index()
         {
+            this.log.LogInformation("Index Action called.");
             return View();
         }
 

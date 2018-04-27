@@ -22,7 +22,7 @@ export default class RegistrationForm extends React.Component {
                 passwordRepeat: ''
             });
 
-            return
+            return;
         }
 
         var data = new FormData();

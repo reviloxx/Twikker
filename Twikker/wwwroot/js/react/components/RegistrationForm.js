@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import sha256 from '../../node_modules/crypto-js/sha256';
 
 export default class RegistrationForm extends React.Component {
     constructor(props) {
@@ -15,7 +16,9 @@ export default class RegistrationForm extends React.Component {
         var data = new FormData();
         data.append('NickName', this.state.nickName);
         data.append('Email', this.state.eMail);
-        data.append('Password', this.state.password);
+
+        var encryptedPW = sha256(this.state.password);
+        data.append('Password', encryptedPW);
 
         var xhr = new XMLHttpRequest();
         xhr.open('post', "user/register", true);

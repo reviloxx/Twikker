@@ -3,28 +3,28 @@
     "UserId": "1",
     "Email": "m@m.at",
     "NickName": "Hans",
-    "Password": "1234"
+    "Password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
   },
 
   {
     "UserId": "2",
     "Email": "1@m.at",
     "NickName": "Peter",
-    "Password": "1234"
+    "Password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
   },
 
   {
     "UserId": "3",
     "Email": "2@m.at",
     "NickName": "Franz",
-    "Password": "1234"
+    "Password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
   },
 
   {
     "UserId": "4",
     "Email": "3@m.at",
     "NickName": "Sissi",
-    "Password": "1234"
+    "Password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"
   }
 ]
 

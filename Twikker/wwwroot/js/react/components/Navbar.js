@@ -22,10 +22,16 @@ export default class Navbar extends React.Component {
                 <nav className="navbar navbar-inverse navbar-fixed-top">
                     <div className="container">
                         <div className="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
                         </div>
-                        <div>
-                            <ul className="nav navbar-nav">
-                                <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
+                        <div id="bs-example-navbar-collapse-1" className="collapse navbar-collapse">
+                            <ul className="nav navbar-nav">                                
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Profile")}>{this.state.nickName}</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Logout")}>Logout</a></li>
@@ -39,10 +45,16 @@ export default class Navbar extends React.Component {
                 <nav className="navbar navbar-inverse navbar-fixed-top">
                     <div className="container">
                         <div className="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
                         </div>
-                        <div>
-                            <ul className="nav navbar-nav" >
-                                <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
+                        <div id="bs-example-navbar-collapse-1" className="collapse navbar-collapse">
+                            <ul className="nav navbar-nav" >                                
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Register")}>Register</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Login")}>Login</a></li>

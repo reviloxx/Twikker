@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\js\node_modules\crypto-js\bower.json" />
+    <Content Include="wwwroot\js\node_modules\crypto-js\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
@@ -37,6 +42,58 @@
 
   <ItemGroup>
     <None Include="Seed\Users.json" />
+    <None Include="wwwroot\js\node_modules\crypto-js\aes.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\cipher-core.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\CONTRIBUTING.md" />
+    <None Include="wwwroot\js\node_modules\crypto-js\core.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\crypto-js.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\docs\QuickStartGuide.wiki" />
+    <None Include="wwwroot\js\node_modules\crypto-js\enc-base64.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\enc-hex.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\enc-latin1.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\enc-utf16.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\enc-utf8.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\evpkdf.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\format-hex.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\format-openssl.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-md5.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-ripemd160.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha1.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha224.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha256.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha3.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha384.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac-sha512.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\hmac.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\index.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\lib-typedarrays.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\LICENSE" />
+    <None Include="wwwroot\js\node_modules\crypto-js\md5.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\mode-cfb.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\mode-ctr-gladman.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\mode-ctr.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\mode-ecb.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\mode-ofb.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-ansix923.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-iso10126.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-iso97971.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-nopadding.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-pkcs7.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pad-zeropadding.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\pbkdf2.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\rabbit-legacy.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\rabbit.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\rc4.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\README.md" />
+    <None Include="wwwroot\js\node_modules\crypto-js\ripemd160.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha1.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha224.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha256.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha3.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha384.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\sha512.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\tripledes.js" />
+    <None Include="wwwroot\js\node_modules\crypto-js\x64-core.js" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

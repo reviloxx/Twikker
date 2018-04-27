@@ -7,8 +7,8 @@ export default class CommentBox extends React.Component {
         super(props);
         this.state = {
             activeUserId: this.props.activeUserId,
-            comments: this.props.comments       
-        }
+            comments: this.props.comments
+        };
     }
 
     render() {
@@ -27,3 +27,4 @@ export default class CommentBox extends React.Component {
         );
     }
 }
+CommentBox.displayName = 'CommentBox';

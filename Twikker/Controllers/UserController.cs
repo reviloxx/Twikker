@@ -56,6 +56,11 @@ namespace Twikker.Web.Controllers
                 return Json(new JSONResponse(false, "Invalid Nickname! Must contain 3 to 20 characters."));
             }
 
+            if (this.users.GetByNickname(user.NickName) != null)
+            {
+                return Json(new JSONResponse(false, "This Nickname is already in use!"));
+            }
+
             if (!this.regexUtilities.IsValidEmail(user.Email))
             {
                 return Json(new JSONResponse(false, "Invalid Email address!"));

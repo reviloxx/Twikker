@@ -65,7 +65,7 @@ namespace Twikker.Web
             }
 
             return true;
-        }
+        }        
 
         private string DomainMapper(Match match)
         {

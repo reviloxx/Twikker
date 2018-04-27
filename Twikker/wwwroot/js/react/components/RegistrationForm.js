@@ -7,12 +7,24 @@ export default class RegistrationForm extends React.Component {
         this.state = {
             nickName: '',
             eMail: '',
-            password: ''
+            password: '',
+            passwordRepeat: ''
         };
     }
 
     handleSubmit(e) {
         e.preventDefault();
+
+        if (this.state.password !== this.state.passwordRepeat) {
+            alert("The passwords must match!");
+            this.setState({
+                password: '',
+                passwordRepeat: ''
+            });
+
+            return
+        }
+
         var data = new FormData();
         data.append('NickName', this.state.nickName);
         data.append('Email', this.state.eMail);
@@ -49,6 +61,10 @@ export default class RegistrationForm extends React.Component {
         this.setState({ password: e.target.value });
     }
 
+    handlePasswordRepeatChange(e) {
+        this.setState({ passwordRepeat: e.target.value });
+    }
+
     render() {
         return (            
             <form className="registration-form" onSubmit={this.handleSubmit.bind(this)} >
@@ -74,6 +90,14 @@ export default class RegistrationForm extends React.Component {
                         type="password"
                         value={this.state.password}
                         onChange={this.handlePasswordChange.bind(this)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Repeat Password</label>
+                    <input className="form-control"
+                        type="password"
+                        value={this.state.passwordRepeat}
+                        onChange={this.handlePasswordRepeatChange.bind(this)}
                     />
                 </div>
                 <input className="btn btn-info" type="submit" value="Register" />

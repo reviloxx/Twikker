@@ -15,6 +15,8 @@ namespace Twikker.Web.Models
 
         public string CreatorNickname { get; set; }
 
+        public DateTime CreationDateTime { get; set; }
+
         public string CreationDate { get; set; }
 
         public string Content { get; set; }

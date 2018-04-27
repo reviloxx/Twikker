@@ -52,6 +52,7 @@ namespace Twikker.Controllers
                     UserTextId = post.UserTextId,
                     CreatorId = post.CreatorId,
                     CreatorNickname = this.users.GetById(post.CreatorId).NickName,
+                    CreationDateTime = post.CreationDate,
                     CreationDate = post.CreationDate.ToString("dd.MM.yyyy, H:mm:ss"),
                     Content = post.Content,
                     Reactions = this.reactions.GetAll(post.UserTextId)?
@@ -76,7 +77,7 @@ namespace Twikker.Controllers
                                 CreatorId = reaction.CreatorId
                             })
                         }),
-                }).OrderByDescending(p => p.CreationDate)
+                }).OrderByDescending(p => p.CreationDateTime)
                 .Skip(postsRequest.StartIndex)
                 .Take(postsRequest.Count);
 

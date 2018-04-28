@@ -29,7 +29,7 @@ export default class PostBox extends React.Component {
                         <h1>Latest Posts</h1>
                         <PostForm onAddedPost={this.props.onPostsChanged} />
                         <PostList onDeletedPost={this.props.onPostsChanged} onChangedComment={this.props.onPostsChanged} activeUserId={this.state.activeUserId} posts={this.state.posts} />
-                        <button className="btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
+                        <button className="load-more-button btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
                     </div>
                 );
             } else {
@@ -47,7 +47,7 @@ export default class PostBox extends React.Component {
                 <div className="post-box" >
                     <h1>Latest Posts</h1>
                     <PostList activeUserId={this.state.activeUserId} posts={this.state.posts} />
-                    <button className="btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
+                    <button className="load-more-button btn btn-info" onClick={this.props.onRequestMorePosts}>Load more</button>
                 </div>
             );
         } else {

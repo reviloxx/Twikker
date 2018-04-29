@@ -11,28 +11,6 @@
     color: white !important;
 }
 
-footer {
-    position: fixed;
-    height: 30px;
-    width: 100%;
-    background: black;
-    visibility: hidden;
-}
-
-#copyright{
-    margin-top: 5px;
-    margin-left: 5px;
-    color: white;
-    
-}
-
-.delete-button {
-    float: right;
-    margin-top: 5px;
-    margin-right: 5px;
-    display: none;
-}
-
 .body-content {
     max-width: 600px;
     margin-top: 100px;
@@ -126,14 +104,15 @@ footer {
     float: left;
 }
 
-.load-more-button {
-    margin-bottom: 20px;
+.delete-button {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    display: none;
 }
 
-.char-counter {
-    margin-top: 4px;
-    float: left;
-    color: white;
+.load-more-button {
+    margin-bottom: 20px;
 }
 
 .reaction-button {
@@ -146,6 +125,12 @@ footer {
     width: 20px;
 }
 
+.char-counter {
+    margin-top: 4px;
+    float: left;
+    color: white;
+}
+
 .reaction-counter {
     margin-right: 5px;   
     margin-bottom: 2px;
@@ -154,4 +139,3 @@ footer {
 .post-list {
     margin-bottom: 60px;
 }
-

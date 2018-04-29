@@ -139,3 +139,8 @@
 .post-list {
     margin-bottom: 60px;
 }
+
+.alert {
+    margin-top: 20px;
+    display: none;
+}

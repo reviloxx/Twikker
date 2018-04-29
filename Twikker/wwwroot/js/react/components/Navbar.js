@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
                             </button>
                             <a className="navbar-brand" href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Twikker</a>
                         </div>
-                        <div id="navbar-collapse-1" className="collapse navbar-collapse">
+                        <div className="collapse navbar-collapse" id="navbar-collapse-1">
                             <ul className="nav navbar-nav">                                
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Home")}>Home</a></li>
                                 <li><a href="#" onClick={this.props.onItemClicked.bind(this.props, "Profile")}>{this.state.nickName}</a></li>

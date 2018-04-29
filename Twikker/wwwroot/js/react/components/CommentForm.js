@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class CommentForm extends React.Component {
     constructor(props) {
@@ -22,20 +23,18 @@ export default class CommentForm extends React.Component {
         data.append('content', text);
         data.append('postId', this.props.postId);
 
+        ajaxhandler.ajaxRequest(data, 'comments/add', this.handleResponse.bind(this));
         var xhr = new XMLHttpRequest();
         xhr.open('post', "comments/add", true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
+    }
 
-            if (data.successful) {
-                this.setState({ content: '' });
-                this.props.onAddedComment();
-            } else {
-                alert(data.responseData);
-            }
-            
-        }.bind(this);
-        xhr.send(data);
+    handleResponse(response) {
+        if (response.successful) {
+            this.setState({ content: '' });
+            this.props.onAddedComment();
+        } else {
+            alert(response.responseData);
+        }
     }
 
     render() {

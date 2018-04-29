@@ -197,7 +197,7 @@ namespace Twikker.Controllers
             });
 
             this.reactions.Add(newReaction);
-            return Content("Success :");
+            return Json(new JSONResponse(true));
         }
 
         [Route("reactions/delete")]
@@ -207,8 +207,8 @@ namespace Twikker.Controllers
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
 
             this.reactions.Remove(reaction.TextId, userId);
-            
-            return Content("Success :");
+
+            return Json(new JSONResponse(true));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class Reaction extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class Reaction extends React.Component {
         e.preventDefault();
 
         var data = new FormData();
-        var xhr = new XMLHttpRequest();
+        data.append('textId', this.props.textId);
         var newReactions;
 
         if (this.state.activeUserAlreadyLiked) {
@@ -31,24 +32,15 @@ export default class Reaction extends React.Component {
             this.setState({ reactions: newReactions });
             this.setState({ iconSrc: "Images/like.png" });
             this.setState({ activeUserAlreadyLiked: false });
-
-            data.append('textId', this.props.textId);
-            xhr.open('post', "reactions/delete", true);
+            ajaxhandler.ajaxRequest(data, 'reactions/delete', null);
         } else {     
             newReactions = this.state.reactions.slice();
             newReactions.push({ reaction: "like" });
             this.setState({ reactions: newReactions });
             this.setState({ iconSrc: "Images/liked.png" });
             this.setState({ activeUserAlreadyLiked: true });
-
-            data.append('textId', this.props.textId);
-            xhr.open('post', "reactions/add", true);
+            ajaxhandler.ajaxRequest(data, 'reactions/add', null);
         }               
-        
-        xhr.onload = function () {
-            
-        }.bind(this);
-        xhr.send(data);
     }    
 
     render() {

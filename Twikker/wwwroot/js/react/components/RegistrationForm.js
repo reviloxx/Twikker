@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import sha256 from '../../node_modules/crypto-js/sha256';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class RegistrationForm extends React.Component {
     constructor(props) {
@@ -21,32 +22,24 @@ export default class RegistrationForm extends React.Component {
                 password: '',
                 passwordRepeat: ''
             });
-
             return;
         }
 
         var data = new FormData();
-        data.append('NickName', this.state.nickName);
-        data.append('Email', this.state.eMail);
-
         var encryptedPW = sha256(this.state.password);
+        data.append('NickName', this.state.nickName);
+        data.append('Email', this.state.eMail);        
         data.append('Password', encryptedPW);
+        ajaxhandler.ajaxRequest(data, 'user/register', this.handleResponse.bind(this));
+    }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "user/register", true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-
-            if (data.successful) {
-                alert(data.responseData);
-                this.props.onRegistered();
-            } else {
-                alert(data.responseData);
-            }
-
-            
-        }.bind(this);
-        xhr.send(data);
+    handleResponse(response) {
+        if (response.successful) {
+            alert(response.responseData);
+            this.props.onRegistered();
+        } else {
+            alert(response.responseData);
+        }
     }
 
     handleNickNameChange(e) {

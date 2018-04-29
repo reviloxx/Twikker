@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class PostForm extends React.Component {
     constructor(props) {
@@ -14,28 +15,24 @@ export default class PostForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
         var text = this.state.content.trim();
         if (!text) {
             return;
         }
+
         var data = new FormData();
         data.append('content', text);
+        ajaxhandler.ajaxRequest(data, 'posts/add', this.handleResponse.bind(this));
+    }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "posts/add", true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-
-            if (data.successful) {
-                this.setState({ content: '' });
-                this.props.onAddedPost();
-            } else {
-                alert(data.responseData);
-            }
-            
-        }.bind(this);
-        xhr.send(data);
-        
+    handleResponse(response) {
+        if (response.successful) {
+            this.setState({ content: '' });
+            this.props.onAddedPost();
+        } else {
+            alert(response.responseData);
+        }
     }
 
     render() {
@@ -70,3 +67,4 @@ export default class PostForm extends React.Component {
         }
     }
 }
+PostForm.displayName = 'PostForm';

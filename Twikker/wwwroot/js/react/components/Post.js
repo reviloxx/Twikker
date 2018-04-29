@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import Reaction from './Reaction';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class Post extends React.Component {
     constructor(props) {
@@ -20,18 +21,15 @@ export default class Post extends React.Component {
     handleDeleteClick(e) {
         e.preventDefault();
         if (confirm("Are you sure to delete this post?")) {
-            console.log("Delete Post: " + this.props.postId);
             var data = new FormData();
             data.append('postId', this.props.postId);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('post', "posts/delete", true);
-            xhr.onload = function () {
-                this.props.onDeletedPost();
-            }.bind(this);
-            xhr.send(data);
+            ajaxhandler.ajaxRequest(data, 'posts/delete', this.handleResponse.bind(this));
         }
     }    
+
+    handleResponse(response) {
+        this.props.onDeletedPost();
+    }
 
     render() {
         if (this.props.activeUserId === this.props.creatorId) {

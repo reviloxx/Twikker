@@ -25,6 +25,7 @@ namespace Twikker.Web.Controllers
 
         [Route("user/get")]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        [HttpPost]
         public IActionResult GetActive()
         {
             bool loggedIn = int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId);
@@ -113,6 +114,11 @@ namespace Twikker.Web.Controllers
                 return Json(new JSONResponse(false, "Invalid Nickname! Must contain 3 to 20 characters."));
             }
 
+            if (this.users.GetByNickname(user.NickName) != null && this.users.GetById(activeUserId).NickName != user.NickName)
+            {
+                return Json(new JSONResponse(false, "This Nickname is already in use!"));
+            }
+
             if (!this.regexUtilities.IsValidEmail(user.Email))
             {
                 return Json(new JSONResponse(false, "Invalid Email address!"));
@@ -156,11 +162,8 @@ namespace Twikker.Web.Controllers
             }
             else
             {
-                //ModelState.TryAddModelError("", "Nickname or password is wrong.");
                 return Json(new JSONResponse(false));
-            }
-
-            
+            }            
         }
 
         [Route("user/logout")]

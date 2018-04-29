@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import sha256 from '../../node_modules/crypto-js/sha256';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -13,27 +14,22 @@ export default class LoginForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         var data = new FormData();
-        data.append('NickName', this.state.nickName);
-
         var encryptedPW = sha256(this.state.password);
+        data.append('NickName', this.state.nickName);        
         data.append('Password', encryptedPW);
+        ajaxhandler.ajaxRequest(data, 'user/login', this.handleResponse.bind(this));
+    }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "user/login", true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            if (data.successful) {
-                this.props.onLoggedIn();
-            } else {
-                alert("Nickname / E-Mail or password wrong.");
-                this.setState({
-                    nickName: '',
-                    password: ''
-                });
-            }
-            
-        }.bind(this);
-        xhr.send(data);
+    handleResponse(response) {
+        if (response.successful) {
+            this.props.onLoggedIn();
+        } else {
+            alert("Nickname / E-Mail or Password wrong.");
+            this.setState({
+                nickName: '',
+                password: ''
+            });
+        }
     }
 
     handleNickNameChange(e) {

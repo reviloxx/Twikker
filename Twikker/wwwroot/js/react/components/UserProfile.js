@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class UserProfile extends React.Component {
     constructor(props) {
@@ -21,21 +22,16 @@ export default class UserProfile extends React.Component {
         data.append('Email', this.state.email);
         data.append('DateOfBirth', this.state.dateofbirth);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "user/update", true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
+        ajaxhandler.ajaxRequest(data, 'user/update', this.handleResponse.bind(this));
+    }
 
-            if (data.successful) {
-                alert("User profile updated!");
-                this.props.onUpdated();
-            } else {
-                alert(data.responseData);
-            }
-
-
-        }.bind(this);
-        xhr.send(data);
+    handleResponse(response) {
+        if (response.successful) {
+            alert("User profile updated!");
+            this.props.onUpdated();
+        } else {
+            alert(response.responseData);
+        }
     }
 
     handleNickNameChange(e) {

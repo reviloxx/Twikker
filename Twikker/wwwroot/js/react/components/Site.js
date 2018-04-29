@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import Navbar from './Navbar';
 import UserProfile from './UserProfile';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class Site extends React.Component {
     constructor(props) {
@@ -34,106 +35,112 @@ export default class Site extends React.Component {
 
     getDataUpdateFromServer() {
         this.getActiveUser();
-        this.getPosts(true);
+        this.refreshPosts();
     }
 
     getActiveUser() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', '/user/get', true);
-        xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);            
-            this.setState({
-                user: data
-            });
-            this.setState({
-                user: data
-            });
-        }.bind(this);
-        xhr.send();
+        ajaxhandler.ajaxRequest(null, '/user/get', this.getActiveUserCallback.bind(this));
     }
 
-    getPosts(refresh) {
+    getActiveUserCallback(response) {
+        this.setState({
+            user: response
+        });
+        this.setState({
+            user: response
+        });
+    }
+
+    refreshPosts() {
         var data = new FormData();
+        data.append('StartIndex', 0);
+        data.append('Count', Math.max(this.state.posts.length, this.state.postLoadCount));
 
-        if (refresh) {
-            data.append('StartIndex', 0);
-            data.append('Count', Math.max(this.state.posts.length, this.state.postLoadCount));
-        } else {
-            data.append('StartIndex', this.state.posts.length);
-            data.append('Count', this.state.postLoadCount);
+        ajaxhandler.ajaxRequest(data, '/posts/get', this.refreshPostsCallback.bind(this));
+    }
+
+    refreshPostsCallback(response) {
+        this.setState({
+            posts: response.posts,
+            morePostsAvailable: response.morePostsAvailable,
+            currentPage: null
+        });
+        this.setState({
+            posts: response.posts,
+            morePostsAvailable: response.morePostsAvailable
+        });
+        this.setState({
+            posts: response.posts
+        });
+        this.setState({
+            currentPage:
+            <PostBox
+                onPostsChanged={() => this.refreshPosts()}
+                onRequestMorePosts={() => this.getMorePosts()}
+                activeUserId={this.state.user.userId}
+                posts={this.state.posts}
+                morePostsAvailable={this.state.morePostsAvailable}
+            />
+        });
+    }
+
+    getMorePosts() {
+        var data = new FormData();        
+        data.append('StartIndex', this.state.posts.length);
+        data.append('Count', this.state.postLoadCount);
+
+        ajaxhandler.ajaxRequest(data, '/posts/get', this.getMorePostsCallback.bind(this));
+    }
+
+    getMorePostsCallback(response) {
+        var newPosts = this.state.posts;
+
+        for (var i = 0; i < response.posts.length; i++) {
+            newPosts.push(response.posts[i]);
         }
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "/posts/get", true);
-        xhr.onload = function () {
-            var response = JSON.parse(xhr.responseText);
-            console.log(response);
-            if (refresh) {
-                this.setState({
-                    posts: response.posts,
-                    morePostsAvailable: response.morePostsAvailable,
-                    currentPage: null
-                });
-                this.setState({
-                    posts: response.posts,
-                    morePostsAvailable: response.morePostsAvailable
-                });
-                this.setState({
-                    posts: response.posts
-                });
-            } else {
-                var newPosts = this.state.posts;
 
-                for (var i = 0; i < response.posts.length; i++) {
-                    newPosts.push(response.posts[i]);
-                }
-
-                this.setState({
-                    posts: newPosts,
-                    morePostsAvailable: response.morePostsAvailable,
-                    currentPage: null
-                });
-                this.setState({
-                    morePostsAvailable: response.morePostsAvailable,
-                    posts: newPosts                    
-                });
-                this.setState({
-                    morePostsAvailable: response.morePostsAvailable,
-                    posts: newPosts
-                });
-            }
-            this.setState({
-                currentPage:
-                <PostBox
-                    onPostsChanged={() => this.getPosts(true)}
-                    onRequestMorePosts={() => this.getPosts(false)}
-                    activeUserId={this.state.user.userId}
-                    posts={this.state.posts}
-                    morePostsAvailable={this.state.morePostsAvailable}
-                />
-            });
-        }.bind(this);
-        xhr.send(data);
+        this.setState({
+            posts: newPosts,
+            morePostsAvailable: response.morePostsAvailable,
+            currentPage: null
+        });
+        this.setState({
+            morePostsAvailable: response.morePostsAvailable,
+            posts: newPosts
+        });
+        this.setState({
+            morePostsAvailable: response.morePostsAvailable,
+            posts: newPosts
+        });
+        this.setState({
+            currentPage:
+            <PostBox
+                onPostsChanged={() => this.refreshPosts()}
+                onRequestMorePosts={() => this.getMorePosts()}
+                activeUserId={this.state.user.userId}
+                posts={this.state.posts}
+                morePostsAvailable={this.state.morePostsAvailable}
+            />
+        });
     }
 
     sendLogout() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', '/user/logout', true);
-        xhr.onload = function () {
-            this.componentWillMount();
-        }.bind(this);
-        xhr.send();
+        ajaxhandler.ajaxRequest(null, '/user/logout', this.logoutCallback.bind(this));
+    }
+
+    logoutCallback(response) {
+        this.getDataUpdateFromServer();
     }
     
     onItemClickedCallback(identifier) {
         switch (identifier) {
             case "Home":
-                this.getPosts(true);
+                this.refreshPosts();
                 this.setState({
                     currentPage:
                     <PostBox
-                        onPostsChanged={() => this.getPosts(true)}
-                        onRequestMorePosts={() => this.getPosts(false)}
+                        onPostsChanged={() => this.refreshPosts()}
+                        onRequestMorePosts={() => this.getMorePosts()}
                         activeUserId={this.state.user.userId}
                         posts={this.state.posts}
                         morePostsAvailable={this.state.morePostsAvailable}
@@ -141,15 +148,15 @@ export default class Site extends React.Component {
                 });
                 break;
             case "Register":
-                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.getPosts(true)} /> });
+                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.refreshPosts()} /> });
                 break;
             case "Logout":
                 this.sendLogout();
                 this.setState({
                     currentPage:
                     <PostBox
-                        onPostsChanged={() => this.getPosts(true)}
-                        onRequestMorePosts={() => this.getPosts(false)}
+                        onPostsChanged={() => this.refreshPosts()}
+                        onRequestMorePosts={() => this.getMorePosts()}
                         activeUserId={this.state.user.userId}
                         posts={this.state.posts}
                         morePostsAvailable={this.state.morePostsAvailable}

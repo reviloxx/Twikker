@@ -21,7 +21,6 @@ export default class PostBox extends React.Component {
     }
 
     render() {
-        console.log(this.state.morePostsAvailable);
         if (this.state.activeUserId > -1) {
             if (this.state.morePostsAvailable) {
                 return (

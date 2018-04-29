@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import Reaction from './Reaction';
+import * as ajaxhandler from '../ajax-handler';
 
 export default class Comment extends React.Component {
 
@@ -16,16 +17,13 @@ export default class Comment extends React.Component {
 
     handleDeleteClick(e) {
         e.preventDefault();
-        console.log("Delete Comment: " + this.props.commentId);
         var data = new FormData();
         data.append('commentId', this.props.commentId);
+        ajaxhandler.ajaxRequest(data, 'comments/delete', this.handleResponse.bind(this));
+    }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', "comments/delete", true);
-        xhr.onload = function () {
-            this.props.onDeletedComment();
-        }.bind(this);
-        xhr.send(data);
+    handleResponse(response) {
+        this.props.onDeletedComment();
     }
 
     render() {

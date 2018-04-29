@@ -24,8 +24,15 @@ export default class PostForm extends React.Component {
         var xhr = new XMLHttpRequest();
         xhr.open('post', "posts/add", true);
         xhr.onload = function () {
-            this.setState({ content: '' });
-            this.props.onAddedPost();
+            var data = JSON.parse(xhr.responseText);
+
+            if (data.successful) {
+                this.setState({ content: '' });
+                this.props.onAddedPost();
+            } else {
+                alert(data.responseData);
+            }
+            
         }.bind(this);
         xhr.send(data);
         

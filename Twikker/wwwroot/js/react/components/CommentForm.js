@@ -25,8 +25,15 @@ export default class CommentForm extends React.Component {
         var xhr = new XMLHttpRequest();
         xhr.open('post', "comments/add", true);
         xhr.onload = function () {
-            this.setState({ content: '' });
-            this.props.onAddedComment();
+            var data = JSON.parse(xhr.responseText);
+
+            if (data.successful) {
+                this.setState({ content: '' });
+                this.props.onAddedComment();
+            } else {
+                alert(data.responseData);
+            }
+            
         }.bind(this);
         xhr.send(data);
     }

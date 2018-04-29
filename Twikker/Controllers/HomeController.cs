@@ -97,6 +97,11 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult AddPost(PostModel post)
         {
+            if (post.Content.Length > 300)
+            {
+                return Json(new JSONResponse(false, "The maximum text length is 300."));
+            }
+
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
             var userText = new Data.Models.UserText();
 
@@ -109,7 +114,7 @@ namespace Twikker.Controllers
                 CreationDate = DateTime.Now                
             });
 
-            return Content("Success :");
+            return Json(new JSONResponse(true));
         }       
 
         [Route("posts/delete")]
@@ -135,6 +140,11 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult AddComment(CommentModel comment)
         {
+            if (comment.Content.Length > 300)
+            {
+                return Json(new JSONResponse(false, "The maximum text length is 300."));
+            }
+
             int userId = int.Parse(HttpContext.Session.GetString("UserId"));
             var userText = new Data.Models.UserText();
 
@@ -149,7 +159,7 @@ namespace Twikker.Controllers
                 CreationDate = DateTime.Now
             });
 
-            return Content("Success :");
+            return Json(new JSONResponse(true));
         }
 
         [Route("comments/delete")]

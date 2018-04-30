@@ -41,7 +41,7 @@ export default class RegistrationForm extends React.Component {
     handleResponse(response) {
         if (response.successful) {
             this.alertSuccess(response.responseData);
-            setTimeout(function () { this.props.onRegistered() }.bind(this), 3000);
+            setTimeout(function () { this.props.onRegistered(); }.bind(this), 3000);
         } else {
             this.alertDanger(response.responseData);
         }

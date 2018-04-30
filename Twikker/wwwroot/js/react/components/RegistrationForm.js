@@ -17,11 +17,16 @@ export default class RegistrationForm extends React.Component {
         e.preventDefault();
 
         if (this.state.password !== this.state.passwordRepeat) {
-            this.alertDanger("The passwords must match!");
+            this.alertDanger("The entered passwords must match!");
             this.setState({
                 password: '',
                 passwordRepeat: ''
             });
+            return;
+        }
+
+        if (this.state.password.length < 4) {
+            this.alertDanger("The entered password must be at least 4 chars long.");
             return;
         }
 

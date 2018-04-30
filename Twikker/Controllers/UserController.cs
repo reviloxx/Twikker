@@ -72,11 +72,6 @@ namespace Twikker.Web.Controllers
                 return Json(new JSONResponse(false, "This Email address is already in use!"));
             }
 
-            if (!this.regexUtilities.IsValidPassword(user.Password, minPasswordLength))
-            {
-                return Json(new JSONResponse(false, "Password must contain at least " + minPasswordLength + " characters!"));
-            }
-
             this.users.Add(new Data.Models.User()
             {
                 Email = user.Email,
@@ -121,12 +116,12 @@ namespace Twikker.Web.Controllers
 
             if (!this.regexUtilities.IsValidEmail(user.Email))
             {
-                return Json(new JSONResponse(false, "Invalid Email address!"));
+                return Json(new JSONResponse(false, "Invalid E-mail address!"));
             }
 
             if (this.users.GetByEmail(user.Email) != null && this.users.GetById(activeUserId).Email != user.Email)
             {
-                return Json(new JSONResponse(false, "This Email address is already in use!"));
+                return Json(new JSONResponse(false, "This E-mail address is already in use!"));
             }
 
             this.users.Update(new Data.Models.User()

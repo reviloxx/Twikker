@@ -26,10 +26,6 @@ export default class LoginForm extends React.Component {
             this.props.onLoggedIn();
         } else {
             this.alert();
-            this.setState({
-                nickName: '',
-                password: ''
-            });
         }
     }
 

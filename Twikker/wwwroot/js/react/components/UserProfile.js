@@ -27,10 +27,10 @@ export default class UserProfile extends React.Component {
 
     handleResponse(response) {
         if (response.successful) {
-            alert("User profile updated!");
             this.props.onUpdated();
+            this.alertSuccess("User profile updated!");            
         } else {
-            alert(response.responseData);
+            this.alertDanger(response.responseData);
         }
     }
 
@@ -52,6 +52,22 @@ export default class UserProfile extends React.Component {
 
     handleDateOfBirthChange(e) {
         this.setState({ dateofbirth: e.target.value });
+    }
+
+    alertDanger(message) {
+        $(".alert-danger").html(message);
+        $(".alert-danger").fadeIn(100);
+        setTimeout(function () {
+            $(".alert-danger").fadeOut(100);
+        }, 5000);
+    }
+
+    alertSuccess(message) {
+        $(".alert-success").html(message);
+        $(".alert-success").fadeIn(100);
+        setTimeout(function () {
+            $(".alert-success").fadeOut(100);
+        }, 3000);
     }
 
     render() {
@@ -90,6 +106,8 @@ export default class UserProfile extends React.Component {
                     />
                 </div>
                 <input className="btn btn-info" type="submit" value="Update Profile" />
+                <div className="alert alert-danger" role="alert" />
+                <div className="alert alert-success" role="alert" />
             </form>
         );
     }    

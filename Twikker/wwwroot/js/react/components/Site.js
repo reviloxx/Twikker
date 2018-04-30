@@ -148,7 +148,7 @@ export default class Site extends React.Component {
                 });
                 break;
             case "Register":
-                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.refreshPosts()} /> });
+                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.onItemClickedCallback('Login')} /> });
                 break;
             case "Logout":
                 this.sendLogout();
@@ -167,7 +167,7 @@ export default class Site extends React.Component {
                 this.setState({ currentPage: <LoginForm onLoggedIn={() => this.getDataUpdateFromServer()} /> });
                 break;
             case "Profile":
-                this.setState({ currentPage: <UserProfile onUpdated={() => this.getDataUpdateFromServer()} user={this.state.user} /> });
+                this.setState({ currentPage: <UserProfile onUpdated={() => this.getActiveUser()} user={this.state.user} /> });
                 break;
         }        
     }

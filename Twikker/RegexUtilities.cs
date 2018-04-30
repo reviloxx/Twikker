@@ -57,16 +57,6 @@ namespace Twikker.Web
             return match.Value.Equals(nickname);
         }
 
-        public bool IsValidPassword(string password, int minPasswordLength)
-        {
-            if (password == null || password.Length < minPasswordLength)
-            {
-                return false;
-            }
-
-            return true;
-        }        
-
         private string DomainMapper(Match match)
         {
             // IdnMapping class with default property values.

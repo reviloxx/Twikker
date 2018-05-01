@@ -15,8 +15,6 @@ namespace Twikker.Web.Controllers
         private IUser users;
         private RegexUtilities regexUtilities;
 
-        private static int minPasswordLength = 4;
-
         public UserController(IUser users)
         {
             this.users = users;

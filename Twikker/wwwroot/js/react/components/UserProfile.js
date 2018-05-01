@@ -26,7 +26,8 @@ export default class UserProfile extends React.Component {
     }
 
     handleResponse(response) {
-        if (response.successful) {
+        if (response.successful) {            
+            this.props.onUpdated();
             this.alertSuccess("User profile updated!");
         } else {
             this.alertDanger(response.responseData);

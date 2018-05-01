@@ -54,27 +54,22 @@ namespace Twikker.Web.Controllers
         {           
             if (!this.regexUtilities.IsValidNickname(user.NickName))
             {
-                return Json(new JSONResponse(false, "Invalid Nickname! Must contain 3 to 20 characters."));
+                return Json(new JSONResponse(false, "Invalid nickname! The nickname must contain 3 to 20 characters."));
             }
 
             if (this.users.GetByNickname(user.NickName) != null)
             {
-                return Json(new JSONResponse(false, "This Nickname is already in use!"));
+                return Json(new JSONResponse(false, "The entered nickname is already in use!"));
             }
 
             if (!this.regexUtilities.IsValidEmail(user.Email))
             {
-                return Json(new JSONResponse(false, "Invalid Email address!"));
+                return Json(new JSONResponse(false, "Invalid E-mail address!"));
             }
 
             if (this.users.GetByEmail(user.Email) != null)
             {
-                return Json(new JSONResponse(false, "This Email address is already in use!"));
-            }
-
-            if (!this.regexUtilities.IsValidPassword(user.Password, minPasswordLength))
-            {
-                return Json(new JSONResponse(false, "Password must contain at least " + minPasswordLength + " characters!"));
+                return Json(new JSONResponse(false, "The entered E-mail address is already in use!"));
             }
 
             this.users.Add(new Data.Models.User()

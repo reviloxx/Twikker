@@ -97,19 +97,23 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult AddPost(PostModel post)
         {
+            if (!int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId))
+            {
+                return Json(new JSONResponse(false, "Unexpected Error"));
+            }
+
             if (post.Content.Length > 300)
             {
                 return Json(new JSONResponse(false, "The maximum text length is 300."));
             }
-
-            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            
             var userText = new Data.Models.UserText();
 
             this.posts.Add(new Data.Models.Post()
             {
                 Content = post.Content,
                 UserText = userText,
-                Creator = this.users.GetById(userId),
+                Creator = this.users.GetById(activeUserId),
                 UserTextId = userText.UserTextId,
                 CreationDate = DateTime.Now                
             });
@@ -140,22 +144,26 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult AddComment(CommentModel comment)
         {
+            if (!int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId))
+            {
+                return Json(new JSONResponse(false, "Unexpected Error"));
+            }
+
             if (comment.Content.Length > 300)
             {
                 return Json(new JSONResponse(false, "The maximum text length is 300."));
             }
-
-            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            
             var userText = new Data.Models.UserText();
 
             this.comments.Add(new Data.Models.Comment()
             {
-                CreatorId = userId,
+                CreatorId = activeUserId,
                 Content = comment.Content,
                 UserText = userText,
                 Post = this.posts.GetById(comment.PostId),
                 PostId = comment.PostId,
-                Creator = this.users.GetById(userId),
+                Creator = this.users.GetById(activeUserId),
                 CreationDate = DateTime.Now
             });
 
@@ -184,12 +192,15 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult AddReaction(ReactionModel reaction)
         {
-            // TODO: Session timeout
-            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            if (!int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId))
+            {
+                return Json(new JSONResponse(false, "Unexpected Error"));
+            }
+
             var newReaction = (new Data.Models.Reaction()
             {
-                Creator = this.users.GetById(userId),
-                CreatorId = userId,
+                Creator = this.users.GetById(activeUserId),
+                CreatorId = activeUserId,
                 CreationDate = DateTime.Now,
                 UserText = this.userTexts.GetById(reaction.TextId),
                 UserTextId = reaction.TextId,
@@ -204,9 +215,12 @@ namespace Twikker.Controllers
         [HttpPost]
         public IActionResult DeleteReaction(ReactionModel reaction)
         {
-            int userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            if (!int.TryParse(HttpContext.Session.GetString("UserId"), out int activeUserId))
+            {
+                return Json(new JSONResponse(false, "Unexpected Error"));
+            }
 
-            this.reactions.Remove(reaction.TextId, userId);
+            this.reactions.Remove(reaction.TextId, activeUserId);
 
             return Json(new JSONResponse(true));
         }

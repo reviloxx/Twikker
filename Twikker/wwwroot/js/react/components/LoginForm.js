@@ -70,8 +70,7 @@ export default class LoginForm extends React.Component {
                     </div>                   
                     <input className="btn btn-info" type="submit" value="Login" />     
                     <div className="alert alert-danger" role="alert">Nickname / E-Mail or Password wrong.</div>
-                </form>
-                
+                </form>                
             </div>
         );
     }

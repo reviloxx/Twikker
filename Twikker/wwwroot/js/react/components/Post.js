@@ -20,7 +20,7 @@ export default class Post extends React.Component {
 
     handleDeleteClick(e) {
         e.preventDefault();
-        if (confirm("Are you sure to delete this post?")) {
+        if (confirm("Do you really want to delete this post?")) {
             var data = new FormData();
             data.append('postId', this.props.postId);
             ajaxhandler.ajaxRequest(data, 'posts/delete', this.handleResponse.bind(this));

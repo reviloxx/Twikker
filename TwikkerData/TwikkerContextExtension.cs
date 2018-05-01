@@ -28,19 +28,19 @@ namespace Twikker.Data
         {
             if (!context.Users.Any())
             {
-                var users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + "Users.json"));
+                var users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText("Seeding" + Path.DirectorySeparatorChar + "Users.json"));
                 context.AddRange(users);
 
-                var userTexts = JsonConvert.DeserializeObject<List<UserText>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + "UserTexts.json"));
+                var userTexts = JsonConvert.DeserializeObject<List<UserText>>(File.ReadAllText("Seeding" + Path.DirectorySeparatorChar + "UserTexts.json"));
                 context.AddRange(userTexts);
 
-                var posts = JsonConvert.DeserializeObject<List<Post>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + "Posts.json"));
+                var posts = JsonConvert.DeserializeObject<List<Post>>(File.ReadAllText("Seeding" + Path.DirectorySeparatorChar + "Posts.json"));
                 context.AddRange(posts);
 
-                var comments = JsonConvert.DeserializeObject<List<Comment>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + "Comments.json"));
+                var comments = JsonConvert.DeserializeObject<List<Comment>>(File.ReadAllText("Seeding" + Path.DirectorySeparatorChar + "Comments.json"));
                 context.AddRange(comments);
 
-                var reactions = JsonConvert.DeserializeObject<List<Reaction>>(File.ReadAllText("Seed" + Path.DirectorySeparatorChar + "Reactions.json"));
+                var reactions = JsonConvert.DeserializeObject<List<Reaction>>(File.ReadAllText("Seeding" + Path.DirectorySeparatorChar + "Reactions.json"));
                 context.AddRange(reactions);
 
                 context.SaveChanges();

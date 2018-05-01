@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Seed\Users.json" />
+    <Content Remove="Seeding\Users.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Seed\Users.json" />
+    <None Include="Seeding\Users.json" />
     <None Include="wwwroot\js\node_modules\crypto-js\aes.js" />
     <None Include="wwwroot\js\node_modules\crypto-js\cipher-core.js" />
     <None Include="wwwroot\js\node_modules\crypto-js\CONTRIBUTING.md" />

@@ -148,7 +148,7 @@ export default class Site extends React.Component {
                 });
                 break;
             case "Register":
-                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.refreshPosts()} /> });
+                this.setState({ currentPage: <RegistrationForm onRegistered={() => this.onItemClickedCallback('Login')} /> });
                 break;
             case "Logout":
                 this.sendLogout();

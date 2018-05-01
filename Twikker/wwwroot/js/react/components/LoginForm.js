@@ -25,11 +25,7 @@ export default class LoginForm extends React.Component {
         if (response.successful) {
             this.props.onLoggedIn();
         } else {
-            this.alert();
-            this.setState({
-                nickName: '',
-                password: ''
-            });
+            this.alertDanger('Nickname / E - Mail or Password wrong.');
         }
     }
 
@@ -41,7 +37,8 @@ export default class LoginForm extends React.Component {
         this.setState({ password: e.target.value });
     }
 
-    alert() {
+    alertDanger(message) {
+        $(".alert").html(message);
         $(".alert").fadeIn(100);
         setTimeout(function () {
             $(".alert").fadeOut(100);
@@ -69,8 +66,9 @@ export default class LoginForm extends React.Component {
                         />
                     </div>                   
                     <input className="btn btn-info" type="submit" value="Login" />     
-                    <div className="alert alert-danger" role="alert">Nickname / E-Mail or Password wrong.</div>
-                </form>                
+                    <div className="alert alert-danger" role="alert"/>
+                </form>
+                
             </div>
         );
     }

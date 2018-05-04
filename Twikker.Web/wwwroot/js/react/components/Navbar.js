@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
     componentDidMount() {
         $(document).ready(function () {
             $('.nav a').on('click', function () {
-                $('.navbar-toggle').click();
+                $('.navbar-collapse').collapse('hide');
             });
         });
     }

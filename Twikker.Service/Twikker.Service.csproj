@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TwikkerData\Twikker.Data.csproj" />
+    <ProjectReference Include="..\Twikker.Data\Twikker.Data.csproj" />
   </ItemGroup>
 
 </Project>

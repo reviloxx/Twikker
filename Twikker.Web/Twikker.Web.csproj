@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Twikker.Data\Twikker.Data.csproj" />
     <ProjectReference Include="..\Twikker.Service\Twikker.Service.csproj" />
-    <ProjectReference Include="..\TwikkerData\Twikker.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twikker.Web", "Twikker\Twikker.Web.csproj", "{A78CFDA2-4CF2-4536-8999-2F8A55984E5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twikker.Web", "Twikker.Web\Twikker.Web.csproj", "{A78CFDA2-4CF2-4536-8999-2F8A55984E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twikker.Data", "TwikkerData\Twikker.Data.csproj", "{4C200F97-D6F9-40B4-9910-7F7FF490A44E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twikker.Data", "Twikker.Data\Twikker.Data.csproj", "{4C200F97-D6F9-40B4-9910-7F7FF490A44E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twikker.Service", "Twikker.Service\Twikker.Service.csproj", "{12C5B9E0-9780-443C-BF84-A1BA53A34063}"
 EndProject
